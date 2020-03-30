@@ -1,0 +1,142 @@
+
+{% extends 'default/Back/squelette.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Compaign Space</h1>
+        <a href="#test1"  id="add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="Testsadd()"><i class=""  ><img src="{{ asset('Back/img/add.png') }}"></i> Add Compaign</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row" style="padding: 0 7em 7em 0">
+
+    {% if cm == NULL %}
+        <h3>NO Compaigns Found</h3>
+    {% else %}
+
+        <table class="table-bordered" >
+            <thead style="background-color: #feaf31">
+            <tr>
+                <td style="color:#101010" align="center">Name</td>
+                <td style="color: #101010" align="center">Decription</td>
+                <td style="color: #101010" align="center">Image</td>
+                <td style="color: #101010" align="center">Target</td>
+                <td style="color: #101010" align="center">Still Needed</td>
+                <td style="color: #101010" align="center">Number Donors</td>
+                <td style="color: #101010" align="center">Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in cm %}
+                <tr>
+                    <td>{{ i.nameCmp }}</td>
+                    <td style="word-break: break-word">{{ i.descrip }}</td>
+                    <td><img src="{{ asset('../../swr/web/uploads/') }}{{ i.urlimg }}"  height="100" width="190"></td>
+                    <td>{{ i.target }}</td>
+                    <td>{{ i.stillneeded }}</td>
+                    <td>{{ i.nbdon }}</td>
+
+                    <td align="center">
+                        <a href="{{ path('cmp_delete', { 'id': i.idCmp} ) }}">
+                            <img src="{{ asset('Back/img/delete.png') }}">
+                        </a>
+
+                        <a  href="{{ path('cmp_upp', { 'id': i.idCmp} ) }}"  id="mod" onclick="TestsFunction({{ i.idCmp }})">
+                            <img src="{{ asset('Back/img/edit.png') }}">
+
+
+
+                        </a>
+                    </td>
+
+
+                </tr>
+                            {% endfor %} {% endif %}
+            </tbody>
+        </table>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4" id="Testadd" hidden="true">
+            <div class="card shadow mb-4" id="test1" onclick="window.location.hash='add'; ">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Add Compaign In Few Easy Steps</h6>
+                </div>
+                <div class="card-body">
+                    {{ form_start(f, {'method': 'post', 'action': path('cmp_add')   } ) }}
+                    <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                    {{ form_widget(f.nameCmp,{'attr': {'class': 'form-control', 'placeholder': 'Compaign Name'} }) }}
+                    <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                    {{ form_widget(f.descrip,{'attr': {'class': 'form-control', 'placeholder': 'Description'} }) }}
+                    <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                    {{ form_widget(f.target,{'attr': {'class': 'form-control', 'placeholder': 'Target'} }) }}
+                    <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                    <div class="custom-file">
+                        <input type="file" required="required"  class="custom-file-input" id="file" name="urlimg">
+                        <label id="file-text" class="custom-file-label" for="customFile">Choose Image &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    </div>
+                    <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                    <button type="submit" class="btn btn-primary mb-2" >Submit</button>
+{{ form_end(f) }}
+                </div>
+            </div>
+        </div>
+
+              {% if cmp.idCmp!=NULL %}
+            <div class="col-lg-6 mb-4"  id="TestsDiv"    >
+                <div class="card shadow mb-4" id="upadate" onclick="window.location.hash='mod'; ">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Update Compaign In Few Easy Steps</h6>
+                    </div>
+                    <div class="card-body">
+                        <p   id="te" hidden="true"></p>
+                        <form  method="POST" action="">
+
+                        <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                            <input type="text" name="name" value="{{ cmp.nameCmp }}" placeholder="Name" class="form-control">
+                        <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                            <textarea  name="desc" value="{{ cmp.descrip }}" placeholder="description" class="form-control" >{{ cmp.descrip }}</textarea>
+                        <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                            <input type="text" name="target" value="{{ cmp.target }}" placeholder="target" class="form-control">
+                        <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                        <div class="custom-file">
+                            <input type="file" required="required"  class="custom-file-input" id="file" name="urlimg">
+                            <label id="file-text" class="custom-file-label" for="customFile">{{ cmp.urlimg }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </div>
+                        <div class="row" style="padding: 0 7em 1.5em 0"></div>
+                        <button type="submit" class="btn btn-primary mb-2" >Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div> {% endif %}
+
+
+
+        </div>
+        </div>
+
+<script>
+
+    function TestsFunction(id) {
+        var T = document.getElementById("TestsDiv");
+        T.hidden = false;  // <-- Set it to block
+        var T1=document.getElementById("te");
+        T1.innerHTML=id;
+        var T2 = document.getElementById("Testadd");
+        T2.hidden = true;  // <-- Set it to block
+    }
+    function Testsadd() {
+        var T = document.getElementById("Testadd");
+        T.hidden = false;  // <-- Set it to block
+        var T2 = document.getElementById("TestsDiv");
+        T2.hidden = true;  // <-- Set it to block
+    }
+</script>
+    <!-- Div Zeyda ama khaleha -->
+    </div>
+{% endblock %}

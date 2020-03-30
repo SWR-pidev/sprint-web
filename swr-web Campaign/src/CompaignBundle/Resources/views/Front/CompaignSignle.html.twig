@@ -1,0 +1,240 @@
+{% extends 'base.html.twig' %}
+
+{% block login %} {% endblock %}
+{% block username %}
+    <li><a href="faq.html" >
+    <p class="d-flex-center-end"><i class=" xs-round-avatar"><img src="{{ asset('../../swr/web/uploads/') }}{{ u.image }}" class="" ></i> {{ u }} </p>
+        </a></li>
+{% endblock %}
+ {% block logout %}       <li><a href="http://localhost/swr-web/web/app_dev.php/logout">log out</a></li>  {% endblock %}
+
+
+{% block content %}
+
+
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url('{{ asset('Front/assets/images/backgrounds/cmp.jpg') }}')">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h1>Compaings</h1>
+                <p>Give a helping hand for poor people</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="index.html" class="color-white"> Home /</a> Compaigns</li>
+                </ul>
+            </div>
+        </div>
+    </section><!-- End welcome section -->
+
+
+
+    <main class="xs-main">
+        <!-- blog single post -->
+        <div class="xs-content-section-padding xs-blog-single">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <!-- format standard -->
+                        <article class="post format-standard hentry xs-blog-post-details">
+                            <div class="post-media post-image">
+                                <img src="{{ asset('../../swr/web/uploads/') }}{{ cm.urlimg }}" class="img-responsive" alt="">
+                            </div><!-- .post-media END -->
+
+                            <div class="post-body xs-border xs-padding-40">
+                                <div class="entry-header">
+                                    <div class="post-meta row">
+                                        <div class="col-md-2 xs-padding-0">
+                                            <span class="post-meta-date"><b>{{cm.nbdon}}</b> Donors</span>
+                                        </div>
+                                    </div><!-- .row end -->
+                                    <h2 class="entry-title xs-post-entry-title">
+                                        <a>{{ cm.nameCmp }}</a>
+                                    </h2>
+                                </div><!-- header end -->
+
+                                <div class="entry-content">
+
+                                  <p> {{ cm.descrip }}</p>
+
+                                </div><!-- .xs-entry-content END -->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="xs-single-funFact funFact-v2">
+                                            <span class="number-percentage-count number-percentage" data-value="" data-animation-duration="3500">{{cm.raised}}</span><span>$</span>
+                                            <small>Fund Raised</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="xs-single-funFact funFact-v2">
+                                            <span class="number-percentage-count number-percentage" data-value="" data-animation-duration="3500">{{ cm.target }}</span><span>$</span>
+                                            <small>Target</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="xs-single-funFact funFact-v2">
+                                            <span class="number-percentage-count number-percentage" data-value="" data-animation-duration="3500">{{ cm.stillneeded }}</span><span>$</span>
+                                            <small>Still Needed</small>
+                                        </div>
+                                    </div>
+                                </div><!-- .row end -->
+
+
+                            </div><!-- post-body end -->
+                        </article><!-- .post  END -->
+                        <!-- format standard closed -->
+
+                        <!-- post comment -->
+                        <div class="xs-blog-post-comment xs-padding-40 xs-border">
+
+                            <!-- start comment -->
+
+
+
+                            <!-- end comment -->
+
+                            <!-- start respond form -->
+                            <div class="comment-respond">
+                                <h3 class="comment-reply-title">Donate Now </h3>
+
+                                <form action="{{ path('CreateDon', { 'idc': cm.idCmp} ) }}" method="post" class="comment-form" onkeyup=" test({{ cm.stillneeded }})" >
+
+
+                                    <div class="row">
+
+                                        <!-- Default checked -->
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" name="mon">
+                                            <label class="custom-control-label" for="defaultChecked1">Monthly</label>
+                                        </div>
+
+                                    </div><!--Mooooonnnnnnntttttttt .comment-info END -->
+                                    <div class="row" style="padding: 0 7em 1em 0"></div>
+                                    <div class="row">
+                                        <!-- Default checked -->
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="anno">
+                                            <label class="custom-control-label" for="defaultChecked2">Stay Annoymous</label>
+                                        </div>
+                                    </div><!-- aaaaaaaaannnnnnnnnpppppp-->
+                                    <div class="row" style="padding: 0 7em 1em 0"></div>
+                                    <div class="row">
+
+                                        <!-- Default checked -->
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="defaultChecked3" name="funds" >
+                                            <label class="custom-control-label" for="defaultChecked3">Funds</label>
+                                        </div>
+
+                                    </div><!-- .comment-info END -->
+                                    <div class="row" style="padding: 0 7em 1em 0"></div>
+                                    <input type="text" class="form-control" placeholder="Given Amount $" name="given" id="giv" >
+
+                                    <span id="er"></span>
+                                    <div class="row" style="padding: 0 7em 1em 0"></div>
+                                    <textarea placeholder="Type In A Message" name="desc" cols="45" rows="8"></textarea>
+
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-primary" name="submit" id="btn">Submit Payment </button>
+                                    </div>
+                                    <div class="text-left">
+                                        <button class="btn btn-primary" id="btn1">Play A GAME </button>
+                                    </div>
+                                </form><!-- .comment-form END -->
+                            </div>
+                            <!-- end respond form -->
+                        </div>
+                        <!-- end post comment -->
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <!-- sidebar content -->
+                        <div class="sidebar sidebar-right">
+                            <!-- search bar start -->
+                            <div class="widget widget_search">
+                                <form class="xs-serachForm" method="get" action="GET">
+                                    <input type="search" name="search" placeholder="Type keywords...">
+                                    <input type="submit" value="">
+                                </form>
+                            </div>
+                            <!-- search bas stop -->
+                            <!-- recent post start -->
+
+
+                            <!-- recent post end -->
+                            <!-- categories start -->
+                            <div class="widget widget_categories xs-sidebar-widget">
+                                <h3 class="widget-title">Recent Donation</h3>
+                                <ul class="xs-side-bar-list">
+                                    {% for j in rec %}
+                                {% if j.annonym==1 %}        <li><a ><span>Annonymous</span><span>{{ j.message }}</span></a></li>
+                                    {% else %}        <li><a ><span>{{ j.name["username"] }}</span><span>{{ j.message }}</span></a></li> {% endif %} {%  endfor %}
+
+                                </ul>
+                            </div>
+                            <!-- categories end -->
+                            <!-- call to action start -->
+                            <div class="widget widget_call_to_action">
+                                <a href="#" class="d-block">
+                                    <img src="assets/images/side_add_baner.jpg" alt="">
+                                </a>
+                            </div>
+                            <!-- call to action end -->
+                            <!-- insta feed -->
+                            <div class="row" style="padding: 0 7em 1em 0"></div>
+                            <div class="row" style="padding: 0 7em 1em 0"></div>
+                            <div class="row" style="padding: 0 7em 1em 0"></div>
+                            <div class="widget widget_instafeed xs-sidebar-widget">
+                                <div class="row" style="padding: 0 7em 1em 0"></div>
+                                <div class="row" style="padding: 0 7em 1em 0"></div>
+                                <div class="row" style="padding: 0 7em 1em 0"></div>
+                                <div class="row" style="padding: 0 7em 1em 0"></div>
+                                <div class="row" style="padding: 0 7em 1em 0"></div>
+                                <div class="row" style="padding: 0 7em 1em 0"></div>
+                                <h3 class="widget-title">Propositions</h3>
+                   {% for j in p %}                <li><a ><span>  {{ j.detail }}</span><span></span></a></li> {% endfor %}
+                                <ul class="xs-demoFeed clearfix"></ul>
+                            </div>
+                            <!-- insta feed closed -->
+                            <!-- widget tags -->
+
+                            <!-- widget tags closed -->
+                            <!-- widget tags -->
+
+                            <!-- widget tags closed -->
+                            <!-- widget archives -->
+
+                            <!-- widget archives closed -->
+                        </div>				<!-- End sidebar content -->
+                    </div>
+                </div><!-- .row end -->
+            </div><!-- .container end -->
+        </div>	<!-- End blog single post -->
+
+
+
+
+    </main>
+
+<script>
+
+    function test(z){
+        var x=document.getElementById("giv");
+        var y=document.getElementById("er");
+        var b=document.getElementById("btn");
+        y.innerHTML="";
+        if (x.value >z)
+        {
+            y.innerHTML="We cannot accept this much";
+            b.disabled=true;
+        }
+      else  if (isNaN(x.value)){
+
+          y.innerHTML="Only Numbers Are Accepted";
+            b.disabled=true;
+      }
+       else {  b.disabled=false;
+            y.innerHTML="";
+    }}
+</script>
+
+
+{% endblock %}
+{% block check %} {% endblock %}

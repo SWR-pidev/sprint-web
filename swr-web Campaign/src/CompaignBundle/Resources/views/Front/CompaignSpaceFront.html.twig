@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block login %} {% endblock %}
+{% block username %}
+    <li><a  >
+    <p class="d-flex-center-end"><i class=" xs-round-avatar"><img src="{{ asset('../../swr/web/uploads/') }}{{ u.image }}" class="" ></i> {{ u }} </p>
+        </a></li>
+{% endblock %}
+ {% block logout %}       <li><a href="http://localhost/swr-web/web/app_dev.php/logout">log out</a></li>  {% endblock %}
+
+
+{% block content %}
+
+
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url('{{ asset('Front/assets/images/backgrounds/cmp.jpg') }}')">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h1>Compaings</h1>
+                <p>Give a helping hand for poor people</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a  class="color-white"> Home /</a> Compaigns</li>
+                </ul>
+            </div>
+        </div>
+    </section><!-- End welcome section -->
+
+    <main class="xs-main">
+        <!-- box promo section -->
+        <section class="bg-gray waypoint-tigger xs-section-padding">
+            <div class="container">
+                <div class="xs-heading row xs-mb-60">
+                    <div class="col-md-9 col-xl-9">
+                        <h2 class="xs-title">Our Campaigns</h2>
+                        <span class="xs-separetor dashed"></span>
+
+                    </div><!-- .xs-heading-title END -->
+        <div class="row">
+            {% for i in cm %}
+            <div class="col-lg-6 col-md-6">
+                <div class="xs-popular-item xs-box-shadow">
+                    <div class="xs-item-header">
+
+                        <img src="{{ asset('../../swr/web/uploads/') }}{{ i.urlimg }}" alt="" height="380" width="350">
+
+                        <div class="xs-skill-bar">
+                            {% if (i.raised!=0) %}
+                                {% set foo=i.raised/i.target*100|round %}
+                            {% else %}
+                                {% set foo=0 %} {% endif %}
+                            <div class="xs-skill-track bg-light-red">
+
+                                <p><span class="number-percentage-count number-percentage" data-value="{{ foo |round }}" data-animation-duration="3500">0</span>{{ foo | round }}%</p>
+                            </div>
+                        </div>
+                    </div><!-- .xs-item-header END -->
+                    <div class="xs-item-content">
+
+                        <a  class="xs-post-title xs-mb-30">{{ i.nameCmp }}</a>
+
+                        <ul class="xs-list-with-content">
+                            <li>{{ i.raised }} $<span>Raised</span></li>
+                            <li><span class="number-percentage-count number-percentage" data-value="{{ i.stillneeded }}" data-animation-duration="3500">{{ i.stillneeded }}</span> $ <span>Still Needed</span></li>
+                            <li>{{ i.nbdon }}<span>Donors</span></li>
+                        </ul>
+
+                        <span class="xs-separetor"></span>
+
+                        <div class="row xs-margin-0">
+                            <div class="xs-navs-button d-flex-center-end  ">
+                                <a href="{{ path('compaign_signle', { 'id': i.idCmp} ) }}" class="btn btn-primary ">
+                                    <span class="badge"><i class="fa fa-heart"></i></span> Learn More
+                                </a>
+
+                            </div>
+                        </div>
+                    </div><!-- .xs-item-content END -->
+                </div><!-- .xs-popular-item END -->
+            </div>
+            {% endfor %}   </div>    </div>
+
+            </div> </section>
+    </main>
+
+
+
+
+
+
+{% endblock %}
+{% block check %} {% endblock %}

@@ -1,0 +1,21 @@
+cmp:
+  path:     /index
+  defaults: { _controller: CompaignBundle:Compaign:index }
+cmp_delete:
+  path:     /delete/{id}
+  defaults: { _controller: CompaignBundle:Compaign:delete }
+cmp_add:
+  path:     /add
+  defaults: { _controller: CompaignBundle:Compaign:add }
+cmp_upp:
+  path:     /upp/{id}
+  defaults: { _controller: CompaignBundle:Compaign:updateCmp }
+prop_add:
+  path:     /addProp
+  defaults: { _controller: CompaignBundle:Proposition:addProp }
+prop_delete:
+  path:     /deleteprop/{id}
+  defaults: { _controller: CompaignBundle:Proposition:deleteProp }
+prop_upp:
+  path:     /Updateprop/{id}
+  defaults: { _controller: CompaignBundle:Proposition:updateProp }
