@@ -1,0 +1,44 @@
+
+{% block signup %}
+    <div class="form-container sign-in-container">
+
+        {% trans_default_domain 'FOSUserBundle' %}
+        <form action="" method="post">
+            <h1>Sign up</h1>
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+
+
+            <div>
+                {{ form_widget(form.email,{'attr': {'class': 'form-control', 'placeholder': 'Email'} }) }}
+                {{ form_widget(form.username,{'attr': {'class': 'form-control', 'placeholder': 'Username'} }) }}
+                <div class="inline">
+                    <div>{{ form_widget(form.plainPassword.first,{'attr': {'class': 'form-control', 'placeholder': 'Password'} }) }}</div>
+                    <div>{{ form_widget(form.plainPassword.second,{'attr': {'class': 'form-control', 'placeholder': 'Confirm Password'} }) }}</div>
+
+                </div>
+                <div class="inline">
+                    <div>{{ form_widget(form.nom,{'attr': {'class': 'form-control', 'placeholder': 'FirstName'} }) }}</div>
+                    <div>{{ form_widget(form.prenom,{'attr': {'class': 'form-control', 'placeholder': 'LastNamee'} }) }}</div>
+
+                </div>
+
+
+                <div class="inline">
+                    <div>{{ form_widget(form.country,{'attr': {'class': 'form-control', 'placeholder': 'Country'} }) }}</div>
+                    <div>{{ form_widget(form.tel,{'attr': {'class': 'form-control', 'placeholder': 'Phone'} }) }}</div>
+                </div>
+                <div class="custom-file">
+                    <input type="file" required="required"  class="custom-file-input" id="file" name="url">
+                    <label id="file-text" class="custom-file-label" for="customFile">Choose Image &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                </div>
+                <div><a>&nbsp;</a></div>
+                <button class="btn btn-primary" type="submit" name="signup">Sign Up</button>
+            </div>
+
+
+            {{ form_end(form) }}
+        </form>
+    </div>
+{% endblock %}
+

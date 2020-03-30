@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> SWR - {% block title %} Home {% endblock %} </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto+Slab:400,700" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    {% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/font-awesome.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/bootstrap.min.css') }} ">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/xsIcon.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/isotope.css') }} ">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/magnific-popup.css') }} ">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/owl.carousel.min.css') }} ">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/owl.theme.default.min.css') }} ">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/animate.css') }} ">
+
+
+    <!--For Plugins external css-->
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/plugins.css') }} " />
+
+    <!--Theme custom css -->
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/style.css') }} ">
+
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/responsive.css') }}" />
+
+    <!-- use only color version -->
+    <link rel='stylesheet' type='text/css' href='{{ asset('Front/assets/css/colors/color-3.css') }}' >
+    {% endblock %}
+</head>
+    <body>
+    <div id="preloader">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    {% block header %}
+    <header class="xs-header header-transparent">
+        <div class="container">
+            <nav class="xs-menus">
+                <div class="nav-header">
+                    <div class="nav-toggle"></div>
+                    <a href="{{ path('indexFront') }}" class="nav-logo">
+                        <img src="{{ asset('Front/assets/images/logo.png') }}" alt="">
+                    </a>
+                </div><!-- .nav-header END -->
+                <div class="nav-menus-wrapper row">
+
+                    <div class="xs-logo-wraper col-lg-2 xs-padding-0">
+                        <a class="nav-brand" href="{{ path('indexFront') }}">
+                            <img src="{{ asset('Front/assets/images/logo.png') }}" alt="">
+                        </a>
+                    </div><!-- .xs-logo-wraper END -->
+                    <div class="col-lg-7">
+                        <ul class="nav-menu">
+                            <li><a href="{{ path('indexFront') }}">Home</a>
+                            </li>
+                            <li><a href="about.html">about</a></li>
+                            <li><a href="causes.html">News</a></li>
+                            <li><a href="#">Events</a>
+                                <ul class="nav-dropdown">
+                                    <li><a href="{{ path('All_EventP') }}">Attend an Event</a></li>
+                                    <li><a href="{{ path('All_EventS') }}">Become a Sponsor</a></li>
+                                    <li><a href="{{ path('All_EventG') }}">Gallery</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Blog</a>
+                                <ul class="nav-dropdown">
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="blog-single.html">Blog single</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="#">Get Involved</a>
+                                <ul class="nav-dropdown">
+                                    <li><a href="donate-now.html">donate funds</a></li>
+                                    <li><a href="faq.html">donate goods</a></li>
+                                    <li><a href="mission.html">mission</a></li>
+                                    <li><a href="pricing.html">pricing</a></li>
+                                    <li><a href="service.html">service</a></li>
+                                    <li><a href="team.html">team</a></li>
+                                    <li><a href="volunteer.html">volunteer</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Housing</a></li>
+
+
+                        </ul><!-- .nav-menu END -->
+
+                    </div>
+                    <div class="xs-navs-button d-flex-center-end  ">
+                        <a href="#" class="btn btn-primary ">
+                            <span class="badge"><i class="fa fa-heart"></i></span> Donate Now
+                        </a>
+
+                    </div><!-- .xs-navs-button END -->
+
+                    <!-- .User STARTS -->
+                    <div class="dropdown" >
+
+                        <ul class="nav-menu">
+                            <li>
+                                <a class=""><span class="fa fa-user color-white" style="font-size:22px" aria-hidden="true"></span></a>
+
+                                <ul class="nav-dropdown color-navy-blue" >
+
+                                    <!-- .User mahoch aamel login tjih hedhi kahaw -->
+                                   {% block login %} <li ><a href="{{ path('fos_user_security_login') }}" id="a">login</a></li> {% endblock %}
+
+                                    <!-- .User loga c'est bon ywaliw yjiwah hedhom -->
+                                   {% block userinfo %} {% endblock %}
+                                  {% block logout %} {% endblock %}
+
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div> <!-- .User END -->
+
+
+                </div><!-- .nav-menus-wrapper .row END -->
+
+            </nav><!-- .xs-menus .fundpress-menu END -->
+
+        </div><!-- .container end -->
+    </header>
+    {% endblock %}
+
+
+
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+
+
+
+    {% block footer %}
+        <footer class="xs-footer-section">
+            <div class="container">
+                <div class="xs-footer-top-layer">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 footer-widget xs-pr-20">
+                            <a href="index.html" class="xs-footer-logo">
+                                <img src="{{ asset('Front/assets/images/footer_logo.png') }}" alt="">
+                            </a>
+                            <p>SWR online and raise money for charity and causes you’re passionate about. CharityPress is an innovative, cost-effective online.</p>
+                            <ul class="xs-social-list-v2">
+                                <li><a href="" class="color-facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="" class="color-twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="" class="color-dribbble"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="" class="color-pinterest"><i class="fa fa-pinterest"></i></a></li>
+                            </ul><!-- .xs-social-list END -->
+                        </div>
+                        <div class="col-lg-2 col-md-6 footer-widget">
+                            <h3 class="widget-title">About Us</h3>
+                            <ul class="xs-footer-list">
+                                <li><a href="index.html">About employee</a></li>
+                                <li><a href="#">How it works</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Press</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-widget">
+                            <div class="widget recent-posts">
+                                <h3 class="widget-title">Trending Post</h3>
+                                <ul class="xs-recent-post-widget">
+                                    <li>
+                                        <div class="posts-thumb float-left">
+                                            <a href="#">
+                                                <img alt="img" class="img-responsive" src="{{ asset('Front/assets/images/news_feeds_1.jpg') }}">
+                                                <div class="xs-entry-date">
+                                                    <span class="entry-date d-block">21</span>
+                                                    <span class="entry-month d-block">dec</span>
+                                                </div>
+                                                <div class="xs-black-overlay bg-aqua"></div>
+                                            </a>
+                                        </div><!-- .posts-thumb END -->
+                                        <div class="post-info">
+                                            <h4 class="entry-title">
+                                                <a href="#">Child Care Centers</a>
+                                            </h4>
+                                            <div class="post-meta">
+												<span class="comments-link">
+													<i class="fa fa-comments-o"></i>
+													<a href="">300 Comments</a>
+												</span><!-- .comments-link -->
+                                            </div>
+                                        </div><!-- .post-info END -->
+                                        <div class="clearfix"></div>
+                                    </li><!-- 1st post end-->
+                                    <li>
+                                        <div class="posts-thumb float-left">
+                                            <a href="#">
+                                                <img alt="img" class="img-responsive" src="{{ asset('Front/assets/images/news_feeds_2.jpg') }}">
+                                                <div class="xs-entry-date">
+                                                    <span class="entry-date d-block">23</span>
+                                                    <span class="entry-month d-block">sep</span>
+                                                </div>
+                                                <div class="xs-black-overlay bg-aqua"></div>
+                                            </a>
+                                        </div><!-- .posts-thumb END -->
+                                        <div class="post-info">
+                                            <h4 class="entry-title">
+                                                <a href="#">Disaster Relief</a>
+                                            </h4>
+                                            <div class="post-meta">
+												<span class="comments-link">
+													<i class="fa fa-comments-o"></i>
+													<a href="">35 Comments</a>
+												</span><!-- .comments-link -->
+                                            </div>
+                                        </div><!-- .post-info END -->
+                                        <div class="clearfix"></div>
+                                    </li><!-- 2nd post end-->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 footer-widget">
+                            <h3 class="widget-title">Contact Us</h3>
+                            <ul class="xs-info-list">
+                                <li><i class="fa fa-home"></i>Sector # 48, 123 Street, miosya road VIC 28, Australia.</li>
+                                <li><i class="fa fa-phone"></i>(800) 123.456.7890 (800) 123.456.7890 +00 99 88 5647</li>
+                                <li><i class="fa fa-envelope-o"></i><a href="mailto:yourname@domain.com">yourname@domain.com</a></li>
+                            </ul><!-- .xs-list-with-icon END -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="xs-back-to-top-wraper">
+                <a href="#" class="xs-back-to-top"><i class="fa fa-angle-up"></i></a>
+            </div>
+        </footer>
+    {% endblock %}
+
+    {% block javascripts %}  <script src="{{ asset('Front/assets/js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/plugins.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/jquery.waypoints.min.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/jquery.countdown.min.js') }}"></script>
+        <script src="{{ asset('Front/assets/js/spectragram.min.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCy7becgYuLwns3uumNm6WdBYkBpLfy44k"></script>
+
+        <script src="{{ asset('Front/assets/js/main.js') }}"></script>
+        {% block check %}<script src="{{ asset('Front/assets/js/check.js') }}"></script>{% endblock %}{% endblock %}
+    </body>
+
+</html>

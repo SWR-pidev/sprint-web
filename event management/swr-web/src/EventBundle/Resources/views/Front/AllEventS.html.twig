@@ -1,0 +1,93 @@
+{% extends 'default/Front/squelette.html.twig' %}
+{% block title %} Sponsor {% endblock %}
+   {% block login %}{% endblock %}
+{% block userinfo %}
+    <li><a href="faq.html" >
+
+      <p class="d-flex-center-end"><i class=" xs-round-avatar">{% block userimg %}<img src="{{ asset('../../swr/web/uploads/') }}{{ u.image }}" class="" >{% endblock %}</i>{% block user %} {{ u }}{% endblock %} </p>
+
+
+
+
+   </a></li>{% endblock %}
+
+{% block logout %}  <li><a href="{{ path('fos_user_security_logout') }}">log out</a></li>{% endblock %}
+
+{% block check %} {% endblock %}
+
+{% block content %}
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url('{{ asset('Front/assets/images/backgrounds/event_bg.jpg') }}')">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h2>Events</h2>
+                <p>Give a helping hand for Refugees</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="" class="color-white"> Home /</a> Events</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <main class="xs-main">
+
+
+        <!-- popularCauses version 2 section -->
+        <section class="bg-gray waypoint-tigger xs-section-padding">
+            <div class="container">
+                <div class="xs-heading row xs-mb-60">
+                    <div class="col-md-9 col-xl-9">
+                        <h2 class="xs-title">Sponsor Our Events</h2>
+                        <span class="xs-separetor dashed"></span>
+                        <p>FundPress has built a platform focused on aiding entrepreneurs, startups, and <br> companies raise capital from anyone.</p>
+                    </div><!-- .xs-heading-title END -->
+                    <div class="col-xl-3 col-md-3 xs-btn-wraper">
+                        <a href="" class="btn btn-primary bg-orange">all Causes</a>
+                    </div><!-- .xs-btn-wraper END -->
+                </div><!-- .row end -->
+                <div class="row">
+                    {% for i in evt  %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="xs-popular-item xs-box-shadow">
+                            <div class="xs-item-header">
+
+                                <img src="{{ asset('../../swr/web/uploads/') }}{{ i.urlEvt }}" alt="">
+                                {% set foo=((i.budgetEvt-i.stillneededEvt)/i.budgetEvt)*100 | round %}
+                                <div class="xs-skill-bar">
+                                    <div class="xs-skill-track bg-light-red">
+                                        <p><span class="number-percentage-count number-percentage" data-value="{{ foo | round }}" data-animation-duration="3500">0</span>%</p>
+                                    </div>
+                                </div>
+                            </div><!-- .xs-item-header END -->
+                            <div class="xs-item-content">
+
+                                <a href="#" class="xs-post-title xs-mb-30">{{ i.nameEvt }}</a>
+
+                                <ul class="xs-list-with-content">
+                                    <li>{{ i.budgetEvt }} $<span>Budget</span></li>
+                                    <li><span class="number-percentage-count number-percentage" data-value="{{ i.stillneededEvt }}" data-animation-duration="3500">0</span> $ <span>Still Needed</span></li>
+                                    {% set difference = date(i.dateEvt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
+                                    {% set leftDays = difference.days %}
+                                    <li>{{ leftDays }}<span>Days to go</span></li>
+                                </ul>
+
+                                <span class="xs-separetor"></span>
+
+
+                            </div><!-- .xs-item-content END -->
+                        </div><!-- .xs-popular-item END -->
+                    </div>
+
+{% endfor %}
+                </div><!-- .row end -->
+            </div><!-- .container end -->
+        </section>	<!-- End popularCauses version 2 section -->
+    </main>
+
+
+
+
+
+
+{% endblock %}

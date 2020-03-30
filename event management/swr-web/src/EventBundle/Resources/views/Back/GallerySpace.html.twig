@@ -1,0 +1,145 @@
+
+{% extends 'default/Back/squelette.html.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Gallery Space</h1>
+
+    </div>
+
+    <!-- Content Row -->
+    <div class="row" style="padding: 0 8em 7em 0">
+
+        {% if evt == NULL %}
+        <h3>NO Events Found</h3>
+        {% else %}
+
+        <table class="table-bordered" style="margin-left: 4em">
+            <thead style="background-color: #feaf31">
+            <tr>
+                <td style="color:#101010" align="center">Name</td>
+                <td style="color: #101010" align="center">Date</td>
+                <td style="color: #101010" align="center">Time</td>
+                <td style="color: #101010" align="center">Location</td>
+                <td style="color: #101010" align="center">Details</td>
+                <td style="color: #101010" align="center">Budget</td>
+                <td style="color: #101010" align="center">Organizator</td>
+                <td style="color: #101010" align="center">Image</td>
+                <td style="color: #101010" align="center">Viewed</td>
+                <td style="color: #101010" align="center">Sponsors</td>
+                <td style="color: #101010" align="center">Participants</td>
+                <td style="color: #101010" align="center">State</td>
+                <td style="color: #101010" align="center">Still Needed</td>
+                <td style="color: #101010" align="center">Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in evt %}
+                <tr>
+                    <td>{{ i.nameEvt }}</td>
+                    <td>{{ i.dateEvt |date("m/d/Y")}}</td>
+                    <td>{{ i.timeEvt |date( 'H:i:s')}}</td>
+                    <td>{{ i.locationEvt }}</td>
+                    <td style="word-break: break-word">{{ i.detailsEvt }}</td>
+                    <td>{{ i.budgetEvt }}</td>
+                    <td>{{ i.organizatorEvt }}</td>
+                    <td><img src="{{ asset('../../swr/web/uploads/') }}{{ i.urlEvt }}" height="55" width="70"></td>
+                    <td align="center">{{ i.nbviewsEvt }}</td>
+                    <td align="center">{{ i.nbsponsorEvt }}</td>
+                    <td align="center">{{ i.nbparticipantEvt }}</td>
+                    <td>{% if i.stateEvt == NULL %}unlaunched{% else %} Launched {% endif %}</td>
+                    <td>{{ i.stillneededEvt }}</td>
+                    <td align="center">
+
+                        <a href="{{ path('img_display', { 'id': i.idEvt}) }}">
+                            <img src="{{ asset('Back/img/gallery.png') }}">
+                        </a>
+
+                    </td>
+
+
+
+                </tr>
+            {% endfor %} {% endif %}
+            </tbody>
+        </table></div>
+        <div class="row">
+            {% if id != NULL %}
+            <div class="card" style="width: 100%;" id="test" >
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Gallery of <span id="nameEvt">{{ name }}</span></h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i  id="btnAdd"><img src="{{ asset('Back/img/photo.png') }}">Add Image</i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" >
+
+                                <form method="post" action="{{ path('gallery_create') }}" id="form">
+
+                                    <p id="a"></p>
+                                    <input type="text" value="{{ id }}" id="idEvt" name="idEvt" hidden="true" >
+                                <div class="dropdown-header">Select An Image :</div>
+                                <div class="custom-file" style="padding: 0 7em 3.5em 0">
+                                    <input type="file" required="required"  class="custom-file-input" id="f1" name="url" >
+                                    <label id="file-text" class="custom-file-label" for="customFile">Choose Image &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                </div>
+                                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Add</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body ">
+                      {% if img == NULL %} No Image Found
+                        {% else %}
+                        {% for j in img %}
+                        <div class=" row  " style="height: 50%;">
+                            <div class="col-lg-4 col-md-6 ">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Image</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+
+                                                <a class="dropdown-item" href="{{ path('img_delete', { 'id': j.idg} ) }}">Delete</a>
+                                                <div class="dropdown-header">Select file to Update Image:</div>
+                                                <form method="post" action="{{ path('img_update', { 'id': j.idg} ) }}" >
+                                                    <div class="custom-file mr-2" style="padding: 0 7em 3.5em 0" >
+                                                        <input type="file" required="required"  class="custom-file-input" id="f1" name="urlU" >
+                                                        <label id="file-text" class="custom-file-label" for="customFile">Choose Image &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    </div>
+                                                    <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Update</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+
+                                    <img class="card-img-top" src="{{ asset('../../swr/web/uploads/Gallery/') }}{{ j.img }}" alt="Card image cap" >
+
+                                </div>
+
+                            </div>
+                        </div> {% endfor %}{% endif %}
+                    </div>
+                </div>
+            </div>{% endif %}
+        </div>
+
+    <!-- Div Zeyda ama khaleha -->
+    </div>
+    </div>
+{% endblock %}
