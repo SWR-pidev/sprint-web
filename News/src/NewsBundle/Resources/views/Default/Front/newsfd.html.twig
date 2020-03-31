@@ -1,0 +1,90 @@
+
+{% extends 'default/Front/squelette.html.twig' %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+    <section class="xs-welcome-slider">
+        <div class="xs-banner-slider owl-carousel">
+            <div class="xs-welcome-content" style="background-image: url({{ asset('Front/assets/images/backgrounds/news.jpg') }});">
+                <div class="container">
+                    <div class="xs-welcome-wraper color-white">
+                        <h2>NEWS</h2>
+
+
+                    </div><!-- .xs-welcome-wraper END -->
+                </div><!-- .container end -->
+                <div class="xs-black-overlay"></div>
+            </div><!-- .xs-welcome-content END -->
+
+                </div><!-- .container end -->
+                <div class="xs-black-overlay"></div>
+            </div><!-- .xs-welcome-content END -->
+
+
+                </div><!-- .container end -->
+                <div class="xs-black-overlay"></div>
+            </div><!-- .xs-welcome-content END -->
+        </div>
+    </section><!-- End welcome section -->
+    <section class="bg-gray xs-partner-section" align="center" style="background-image: url('{{ asset('Front/assets/images/map.png') }}');">
+        <div class="container" align="center">
+            <div class="row" align="center">
+
+                <div class="col-lg-4 col-md-6" align="center">
+
+                </div>
+                <div class="col-lg-4 col-md-6" align="center">
+                    <div class="xs-box-shadow xs-single-journal" align="center">
+                        <div class="entry-thumbnail " align="center">
+                            <img height="300" width="300" align="center" src="{{ asset('../../swr/web/uploads/' ~ News.image) }}">
+
+                            <div class="entry-header" >
+                                <div class="entry-meta">
+							<span  class="date">
+								<a    rel="bookmark" class="entry-date">
+									Date of publication: {{ News.datepub|date("D,M,Y")}}
+
+								</a>
+							</span>
+                                </div>
+
+                                <h4 class="entry-title" align="center">
+                                    <a >{{News.titre}} </a>
+                                </h4>
+                                <h4  align="center">
+                                    <a >{{News.description}}</a>
+                                </h4>
+                            </div><!-- .xs-entry-header END -->
+                            <span class="xs-separetor"></span>
+                            <div class="post-meta">
+						<span class="comments-link">
+                                <a href="{{ path('news_pdfnewsd',{'id':News.idn}) }}">
+                                <img height="30" width="30"  src="{{ asset('Front/assets/images/pdfn.png') }}">
+                                </a>
+						</span><!-- .comments-link -->
+                                <span class="view-link">
+
+							{{ News.view }} Views
+						</span>
+                            </div><!-- .post-meta END -->
+                            <!-- .post-meta END -->
+                        </div><!-- .xs-from-journal END -->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" align="center">
+
+                </div><!-- .row end -->
+
+            </div>
+        </div>
+                </div>
+                </div><!-- .row end -->
+            </div><!-- .container end -->
+        </div>
+    </section><!-- End partners section -->
+
+    <!-- journal section -->
+
+{% endblock %}

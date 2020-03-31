@@ -1,0 +1,105 @@
+{% extends 'default/Back/squelette.html.twig' %}
+{% block title %} News {% endblock %}
+
+{% block content %}
+
+{% if News==NULL %}
+    Pas de formation
+{% else %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">News</h1>
+        <a href="{{ asset('app_dev.php/ajoutnews') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-circle"></i> </i>  Add News</a></div>
+    <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">News </h6>
+    </div>
+    <div class="card-body">
+    <div class="table-responsive">
+    <table class="table table-bordered"  id="dataTable2" width="100%" cellspacing="0">
+        <tr>
+            <th>titre</th>
+            <th>description</th>
+            <th>datepub</th>
+            <th>nomcat</th>
+            <th>image</th>
+        </tr>
+        {% for elt in News %}
+        <tr>
+
+
+            <td>
+                {{ elt.titre }}
+            </td>
+            <td>
+                {{ elt.description }}
+            </td>
+            <td>
+                {{ elt.datepub|date("Y-m-d")}}
+            </td>
+            <td>
+
+{{ elt.nomcat }}
+
+            </td>
+            <td><img src="{{ asset('../../swr/web/uploads/' ~ elt.image) }}" width="100" height="100"></td>
+            <td>
+                <a href="{{ path('news_deletenews',{'id':elt.idn}) }}" onclick="suppr()" id="supp"><div class="input-group-append">
+                        <button class="btn btn-primary"> Delete</button>
+
+                    </div></a>
+            </td>
+            <td>
+                <a href="{{ path('news_modifynews',{'id':elt.idn}) }}"><div class="input-group-append">
+                        <button class="btn btn-primary"> Modify</button>
+
+                    </div></a>
+            </td>
+            {% endfor %}
+        </tr>
+
+    </table>
+
+    </div>
+    </div>
+        <div class="navigation">
+            {{ knp_pagination_render(News) }}
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script>
+      let supp = document.getElementById('supp');
+
+      function suppr() {
+          confirm('are you sure you want to delete this news ?');
+      }
+    </script>
+   <!-- <script type="text/javascript">
+
+
+        $('a#supp').each(function () {
+
+
+
+            $(this).confirm({
+                title: 'Alert !',
+                content: 'etes-vous sur de supprimer ce film ?',
+                buttons: {
+
+                    Oui: function () {
+                        location.href = this.$target.attr('href');
+                    },
+                    Non: function () {
+
+                    }
+
+                }
+            });
+
+
+        });
+        </script>-->
+{% endif %}
+{% endblock %}

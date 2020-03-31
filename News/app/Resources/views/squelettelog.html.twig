@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> SWR - {% block title %} Web {% endblock %}</title>
+
+    <!-- Custom fonts for this template-->
+
+
+    <!-- Custom styles for this template-->
+    {% block stylesheet %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{ asset('Front/assets/css/styleLogin.css')}}" rel="stylesheet">
+    {% endblock %}
+
+
+</head>
+<body>
+{% block body %}
+<h2>SWR: Sign in/up Form</h2>
+
+    <div class="form-container sign-up-container">
+    </div>
+    <div class="form-container sign-in-container">
+        {% block signin %}
+        {% endblock %}
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('Front/assets/js/login.js')}}"></script>
+{% endblock %}
+</body>
+</html>
