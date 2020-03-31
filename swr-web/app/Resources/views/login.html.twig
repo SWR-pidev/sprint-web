@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SWR - Register</title>
+
+    <!-- Custom fonts for this template-->
+
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{ asset('Back/css/styleLogin.css')}}" rel="stylesheet">
+
+</head>
+<body>
+<h2>SWR: Sign in/up Form</h2>
+<div class="container" id="container">
+
+    <div class="form-container sign-in-container">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <h1>Sign in</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your account</span>
+            <input type="text" name="_username"  placeholder="Username" value="{{ last_username }}" />
+            <input type="password" placeholder="Password" name="_password" id="password" />
+            <a href="#">Forgot your password?</a>
+            <button class="btn btn-primary" type='submit' value="{{ 'security.login.submit'|trans }}">Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+
+            <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your personal details and start journey with us</p>
+               <a href="{{path('fos_user_registration_register')}}"><button class="ghost"  id="signUp">Sign Up</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+
+</footer>
+{#<script src="{{ asset('Back/js/login.js') }}"></script>#}
+
+</body>
+</html>

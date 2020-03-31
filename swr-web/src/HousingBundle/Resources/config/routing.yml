@@ -1,0 +1,16 @@
+housing_homepage:
+    path:     /
+    defaults: { _controller: HousingBundle:Housing:show }
+housing_map:
+    path:     /details/{id}
+    defaults: { _controller: HousingBundle:Housing:map }
+housing_items:
+    path:     /items/{id}
+    defaults: { _controller: HousingBundle:Housing:items }
+housing_rating:
+    path:     /rating
+    defaults: { _controller: HousingBundle:Housing:rating }
+
+
+
+

@@ -1,0 +1,132 @@
+{% extends 'default/Front/squelette.html.twig' %}
+
+{% block content %}
+    <section class="xs-welcome-slider">
+        <div   style="height:147px; background-image: url({{ asset('Front/assets/images/avatar/navbar.jpg') }});">
+            <div class="xs-welcome-content"  >
+
+                <div class="xs-black-overlay"  style="height:147px;" ></div>
+            </div><!-- .xs-welcome-content END -->
+
+        </div>
+    </section><!-- End welcome section -->
+
+
+
+    <section class="xs-section-padding">
+        <div class="container">
+            <div class="xs-heading row xs-mb-60">
+                <div class="col-md-9 col-xl-9">
+                    <h2 class="xs-title">Housings</h2>
+                    <span class="xs-separetor "></span>
+                    <p>It allows you to check the housings available , check locations , check infos and description  for every housing.</p>
+                </div><!-- .xs-heading-title END -->
+                <div  class="col-xl-3 col-md-3 xs-btn-wraper">
+{#                    <a href="" class="btn btn-primary">Home</a>#}
+                </div><!-- .xs-btn-wraper END -->
+                <div id='div_chart'></div>
+            </div><!-- .row end -->
+            <div class="container">
+            <div class="row ">
+
+                {% for elt in housings %}
+
+                <div class="col-lg-4 col-md-6 xs-section-padding-bottom">
+                    <div class="xs-box-shadow xs-single-journal">
+                        <div class="entry-thumbnail ">
+                            {% if elt.type=='Camp' %}
+                            <img src="{{ asset('Front/assets/images/avatar/Camp.jpg') }}" alt="">
+                            {% elseif elt.type=='House' %}
+                            <img src="{{ asset('Front/assets/images/avatar/House.jpg') }}" alt="">
+                            {% endif %}
+                            <div class="post-author">
+{#							<span class="xs-round-avatar">#}
+{#                                {% if elt.type=='Camp' %}#}
+{#								<img class="img-responsive" src="{{ asset('Front/assets/images/avatar/Camp.jpg') }}" alt="">#}
+{#                                {% endif %}#}
+{#							</span>#}
+                                <span class="author-name">
+								<a href="#">{{ elt.type }}</a>
+							</span>
+                            </div>
+                        </div><!-- .xs-item-header END -->
+                        <div class="entry-header">
+                            <div class="entry-meta">
+							<span class="date">
+								<a href=""  rel="bookmark" class="entry-date">
+									{{ elt.name }}
+								</a>
+							</span>
+                                <h6 class="entry-content">Capacity: {{ elt.capacity }}</h6>
+                                <h6 class="entry-content">Nombre of Residents: {{ elt.nbresidents }}</h6>
+{#                               Rating here#}
+                                {% set sumratings = 0 %}
+                                {% set totalratings = 0 %}
+                                {% for rating in ratings %}
+                                    {% if rating.idh.getIdh()==elt.idh %}
+                                        {% set sumratings = sumratings + rating.rating %}
+                                        {% set totalratings =totalratings + 1  %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if totalratings!=0 %}
+                                {% set avg= sumratings/totalratings %}
+                                    <div class="comment-metadata">Rating:
+                                        {% for i in 1..avg|round %}
+                                            <span class="fa fa-star" style="color: orange;"></span>
+
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                {% set avg=0  %}
+                                    <div class="comment-metadata">Rating:
+
+                                    <span class="fa fa-star" ></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+
+
+
+                                    </div>
+                                {% endif %}
+
+{#                                Rating ends here#}
+                            </div>
+
+                            <h4 class="entry-title">
+                                <details title="Description">{{ elt.description }}</details>
+{#                                <a href="#">{{ elt.description }}</a>#}
+                            </h4>
+
+                        </div><!-- .xs-entry-header END -->
+                        <span class="xs-separetor"></span>
+                        <div class="post-meta">
+
+                            <span class="view-link">
+							<i class="fa fa-eye"></i>
+							<a href="{{ path('housing_map',{'id':elt.idh}) }}">More Details</a>
+						</span>
+                        </span><!-- .comments-link -->
+                            <span class="view-link">
+							<i class="fa fa-list"></i>
+							<a href="{{ path('housing_items',{'id':elt.idh}) }}" >Check Items</a>
+
+						</span>
+                        </div><!-- .post-meta END -->
+                    </div><!-- .xs-from-journal END -->
+                </div>
+                {% endfor %}
+            </div><!-- .row end -->
+            </div>
+        </div><!-- .container end -->
+    </section><!-- End journal section -->
+{% endblock %}
+{% block mapjs %}
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <script type="text/javascript"> {{ gc_draw(piechart, 'div_chart') }} </script>
+
+{% endblock %}
+
+
+

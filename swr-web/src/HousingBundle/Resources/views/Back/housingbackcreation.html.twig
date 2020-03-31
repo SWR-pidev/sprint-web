@@ -1,0 +1,148 @@
+{% extends 'default/Back/squelette.html.twig' %}
+
+{% block stylemap %}
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row page-titles">
+
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Create new Housing</h3>
+            </div>
+
+            <div>
+                <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form class="m-t-40"  method="post">
+                            <div class="form-group">
+                                <h5>Name: <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required"> </div>
+
+                            </div>
+                            <div class="form-group">
+                                <h5>Description: <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="description" class="form-control" required data-validation-required-message="This field is required"> </div>
+
+                            </div>
+                            <div class="form-group">
+                                <h5>Address <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="address" class="form-control" required data-validation-required-message="This field is required"> </div>
+
+                            </div>
+                            <div class="form-group">
+                                <h5>Capacity <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="number" name="capacity" class="form-control" required data-validation-required-message="This field is required"> </div>
+                            </div>
+                            <div class="form-group">
+                                <h5> Residents<span class="text-danger">*</span></h5>
+                                <div class="input-group">
+
+                                    <input type="number" name="nbresidents" class="form-control" required data-validation-required-message="This field is required" pattern=".{8}">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h5>Type <span class="text-danger">*</span></h5>
+                                <div class="input-group">
+                                    <select class="form-control"  name="type" required data-validation-required-message="This field is required">
+                                        <option value="Camp">Camp</option>
+                                        <option value="House">House</option>
+
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="container">
+
+                            </div>
+                            <div class="form-group">
+                                <h5> Location:<span class="text-danger">*</span></h5>
+                                <div class="input-group">
+
+                                    <input type="text" name="location" class="form-control"  required data-validation-required-message="This field is required">
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="text-xs-right">
+                                <button type="submit" class="btn btn-info">Submit</button>
+                                <button type="reset" class="btn btn-inverse">Cancel</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="current" class="container xs-section-padding col-md-8 col-sm-1 align-self-center  "><h5> Get Your Location From here: nothing yet...</h5></div>
+    <div id="map" class="container xs-section-padding  col-md-8 col-sm-1 align-self-center"></div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('Back/js/validation.js') }}"></script>
+    <script>
+        ! function(window, document, $) {
+            "use strict";
+            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(), $(".skin-square input").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green"
+            }), $(".touchspin").TouchSpin(), $(".switchBootstrap").bootstrapSwitch();
+        }(window, document, jQuery);
+    </script>
+<script>
+
+    function initMap() {
+        var myLatLng = {lat: 36.872828, lng: 9.769179};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!',
+            draggable: true
+        });
+        marker.addListener('dragend', function(e, i) {
+            document.getElementById('current').innerHTML = 'Get Your Location From here: '+  '['+ marker.getPosition().lat() + ',' + marker.getPosition().lng() + ']';
+        });
+
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALPYyxrjY4KClo41xfDVr7xexBWNB2jqk&callback=initMap">
+</script>
+{% endblock %}
+

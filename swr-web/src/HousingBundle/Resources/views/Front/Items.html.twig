@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <section class="xs-welcome-slider">
+        <div   style="height:147px; background-image: url({{ asset('Front/assets/images/avatar/navbar.jpg') }});">
+            <div class="xs-welcome-content"  >
+
+                <div class="xs-black-overlay"  style="height:147px;" ></div>
+            </div><!-- .xs-welcome-content END -->
+
+        </div>
+    </section><!-- End welcome section -->
+
+
+    <main class="xs-main">
+        <!-- blog single post -->
+
+        <div class="post-media post-image">
+            {% if housing.type=='Camp' %}
+                <img src="{{  asset('Front/assets/images/avatar/Camp.jpg')}}" class="img-responsive" alt="">
+            {% elseif housing.type=='House' %}
+                <img src="{{  asset('Front/assets/images/avatar/House.jpg')}}" class="img-responsive" alt="">
+            {% endif %}
+        </div><!-- .post-media END -->
+
+        <div class="post-body xs-border xs-padding-40">
+            <div class="entry-header">
+                <div class="post-meta row">
+                    <div class="col-md-2 xs-padding-0">
+                        <span class="post-meta-date"><b>{{ housing.nbresidents }}</b> Residents</span>
+                    </div>
+                    <div class="col-md-10 d-flex align-items-end xs-post-meta-list">
+									<span class="post-cat">
+										<i class="fa fa-folder-open"></i><a href="#"> Funding consultancy</a>
+									</span>
+
+                        <span class="tags-links">
+										<i class="fa fa-tags"></i>
+										<a href="#" rel="tag">Fund</a>,
+										<a href="#" rel="tag">Crowd</a>
+									</span>
+
+                        <span class="post-comment">
+										<i class="fa fa-envelope-o"></i>
+										<a href="#">39 Comments</a>
+									</span>
+                    </div>
+                </div><!-- .row end -->
+                <h2 class="entry-title xs-post-entry-title">
+                    {{ housing.name }}
+                </h2>
+            </div><!-- header end -->
+
+            <div class="entry-content">
+
+                <blockquote>
+                    {{ housing.description }}
+                </blockquote>
+
+
+                <ul class="xs-unorder-list play">
+                    <li>Capacity: {{ housing.capacity }}</li>
+                    <li>Nombre of Residents: {{ housing.nbresidents }}</li>
+                    <li>Address: {{ housing.address }}</li>
+
+                </ul>
+
+            </div><!-- .xs-entry-content END -->
+
+
+        </div><!-- End blog single post -->
+
+        <!-- journal section -->
+        <section class="xs-section-padding bg-gray">
+            <div class="container">
+                <div class="xs-heading row xs-mb-60">
+                    <div class="col-md-9 col-xl-9">
+                        <h2 class="xs-title">List of Items</h2>
+                        <span class="xs-separetor dashed"></span>
+                        <p>It allows  to gather goods from supporters to help support the housing . They also encourage the other users to offer help as a way to repay them for their support.</p>
+                    </div><!-- .xs-heading-title END -->
+                    <div class="col-xl-3 col-md-3 xs-btn-wraper">
+                        <a href="{{ path('housing_homepage') }}" class="btn btn-primary">All housings</a>
+                    </div><!-- .xs-btn-wraper END -->
+                </div><!-- .row end -->
+
+
+
+
+                <div class="row">
+                    {% for elt in items %}
+                    <div class="col-lg-4 col-md-6 xs-section-padding-bottom">
+                        <div class="xs-box-shadow xs-single-journal">
+                            <div class="entry-thumbnail ">
+                                <img src="assets/images/blog/blog_1.jpg" alt="">
+                                <div class="post-author">
+							<span class="xs-round-avatar">
+								<img class="img-responsive" src="assets/images/avatar/avatar_1.jpg" alt="">
+							</span>
+                                    <span class="author-name">
+
+							</span>
+                                </div>
+                            </div><!-- .xs-item-header END -->
+                            <div class="entry-header">
+                                <div class="entry-meta">
+							<span class="date">
+								<h4 class="entry-date">
+									{{ elt.name }}
+								</h4>
+							</span>
+                                </div>
+
+                                <h4 class="entry-title">
+                                    <details>
+                                        <summary>Description</summary>
+                                        {{ elt.description }}
+                                    </details>
+
+                                </h4>
+                            </div><!-- .xs-entry-header END -->
+                            <span class="xs-separetor"></span>
+                            <div class="post-meta">
+						<span class="comments-link">
+							<i class="fa fa-comments-o"></i>
+							Quantity needed: {{ elt.quantity }}
+						</span><!-- .comments-link -->
+                                <span class="view-link">
+							<i class="fa fa-eye"></i>
+							Status: <b>{{ elt.status }}</b>
+						</span>
+                                <span class="-street-view">
+                                    {% if elt.status=='Waiting' %}
+                                <button class="btn btn-secondary">Contribute</button>
+                                    {% elseif elt.status=='Collected' %}
+                                 <button class="btn btn-primary" disabled>Thank You :)</button>
+                                    {% endif %}
+                        </span>
+                            </div><!-- .post-meta END -->
+                        </div><!-- .xs-from-journal END -->
+                    </div>{% endfor %}
+
+                </div><!-- .row end -->
+            </div><!-- .container end -->
+        </section>	<!-- End journal section -->
+    </main>
+{% endblock %}
+

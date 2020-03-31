@@ -1,0 +1,47 @@
+housing:
+    resource: "@HousingBundle/Resources/config/routing.yml"
+    prefix:   /housing
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+housing_backupdate:
+    path:     /admin/housing/update/{id}
+    defaults: { _controller: HousingBundle:Housingback:update }
+housing_backdelete:
+    path:     /admin/housing/delete/{id}
+    defaults: { _controller: HousingBundle:Housingback:delete }
+housing_backcreation:
+    path:     /admin/housing/create
+    defaults: { _controller: HousingBundle:Housingback:create }
+housing_back:
+    path:     /admin
+    defaults: { _controller: HousingBundle:Housingback:show }
+User_back:
+    path:     /admin/users
+    defaults: { _controller: HousingBundle:User:showusers }
+User_backcreation:
+    path:     /admin/users/create
+    defaults: { _controller: HousingBundle:User:userAdd }
+User_backupdate:
+    path:     /admin/users/update/{id}
+    defaults: { _controller: HousingBundle:User:update }
+User_backdelete:
+    path:     /admin/users/delete/{id}
+    defaults: { _controller: HousingBundle:User:delete }
+items_backupdate:
+    path:     /admin/items/update/{id}
+    defaults: { _controller: HousingBundle:Itemback:update }
+items_backdelete:
+    path:     /admin/items/delete/{id}
+    defaults: { _controller: HousingBundle:Itemback:delete }
+items_backcreation:
+    path:     /admin/items/create
+    defaults: { _controller: HousingBundle:Itemback:create }
+items_back:
+    path:     /admin/items
+    defaults: { _controller: HousingBundle:Itemback:show }
+#user_profile:
+#    path:     /user/profile/{id}
+#    defaults: { _controller: HousingBundle:User:profile }

@@ -1,0 +1,81 @@
+{% extends 'default/Back/squelette.html.twig' %}
+{% block content %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">   List Housings</h3>
+        </div>
+
+        <div>
+            <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                    <a href="{{ path("housing_backcreation") }}"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add New Housing</button></a>
+
+                        <a href="{{ path("items_back") }}"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Check Items</button></a>
+                    </div>
+                    <br/>
+                    <div class="table-responsive m-t-40">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Address</th>
+                                <th>Capacity</th>
+                                <th>Residents</th>
+                                <th>Type</th>
+                                <th class="text-nowrap">Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for elt in housings %}
+                                <tr>
+
+
+                                    <td>
+                                        {{ elt.name }}
+                                    </td>
+                                    <td>
+                                        {{ elt.description }}
+                                    </td>
+                                    <td>
+                                        {{ elt.address }}
+                                    </td>
+                                    <td>
+                                        {{ elt.capacity }}
+                                    </td>
+                                    <td>
+                                        {{ elt.nbresidents }}
+                                    </td>
+                                    <td>
+                                        {{ elt.type }}
+                                    </td>
+
+
+                                    <td class="text-nowrap">
+                                        <a href="{{ path('housing_backupdate',{'id':elt.idh}) }}" data-toggle="tooltip"  data-original-title="Edit"> <i class="fa fa-edit"></i> </a>
+                                        <a href="{{ path('housing_backdelete',{'id':elt.idh}) }}" data-toggle="tooltip" data-toggle="modal" data-target="#deleteModel" data-original-title="Delete"> <i class="fa fa-trash"></i></i> </a>
+                                    </td>
+
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
