@@ -24,7 +24,11 @@
                 <div  class="col-xl-3 col-md-3 xs-btn-wraper">
 {#                    <a href="" class="btn btn-primary">Home</a>#}
                 </div><!-- .xs-btn-wraper END -->
-                <div id='div_chart'></div>
+                <div class="container">
+                <div class="row">
+                <br>
+                <div id='div_chart2' class="col-md-auto" ></div>
+                <div id='div_chart' class="col-md-auto"></div></div></div>
             </div><!-- .row end -->
             <div class="container">
             <div class="row ">
@@ -125,6 +129,7 @@
 {% block mapjs %}
 
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <script type="text/javascript"> {{ gc_draw(piechart, 'div_chart') }} </script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <script type="text/javascript"> {{ gc_draw(chart, 'div_chart2') }} </script>
 
 {% endblock %}
 

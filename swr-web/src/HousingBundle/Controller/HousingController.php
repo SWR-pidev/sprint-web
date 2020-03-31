@@ -4,6 +4,7 @@
 namespace HousingBundle\Controller;
 
 
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\Material\BarChart;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use HousingBundle\Entity\Housing;
 use HousingBundle\Entity\Items;
@@ -43,7 +44,32 @@ class HousingController extends Controller
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
         $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
         $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
-        return $this->render('@Housing/Front/showAllH.html.twig',array('housings'=>$housings,'piechart'=>$pieChart,'ratings'=>$ratings));
+
+        $chart = new BarChart();
+        $databar=array();
+        $statistics= ['Housings', 'Residents', 'Capacity'];
+        array_push($databar,$statistics);
+        foreach($housings as $housing){
+            $statistics=array();
+            array_push($statistics,$housing->getName(),$housing->getNbresidents(),$housing->getCapacity());
+
+            $stat=[$housing->getName(),$housing->getNbresidents(),$housing->getCapacity()];
+            array_push($databar,$stat);
+        }
+        $chart->getData()->setArrayToDataTable( $databar );
+        $chart->getOptions()->getChart()
+            ->setTitle('Housings')
+            ->setSubtitle('Nombre of Residents on the left, Capacity on the right');
+        $chart->getOptions()
+            ->setHeight(400)
+            ->setWidth(900)
+            ->setSeries([['axis' => 'Residents'], ['axis' => 'Capacity']])
+            ->setAxes(['x' => [
+                'Residents' => ['label' => 'parsecs'],
+                'Capacity' => ['side' => 'top', 'label' => 'apparent magnitude']]
+            ]);
+
+        return $this->render('@Housing/Front/showAllH.html.twig',array('housings'=>$housings,'piechart'=>$pieChart,'chart'=>$chart,'ratings'=>$ratings));
 
     }
 
