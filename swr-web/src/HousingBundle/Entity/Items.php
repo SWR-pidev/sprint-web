@@ -3,10 +3,11 @@
 namespace HousingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Items
- *
  * @ORM\Table(name="items", indexes={@ORM\Index(name="fk_hi", columns={"idh"})})
  * @ORM\Entity(repositoryClass="HousingBundle\Repository\ItemsRepository")
  */
@@ -125,7 +126,8 @@ class Items
     }
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="1", max="100")
      * @ORM\Column(name="description", type="string", length=100, nullable=false)
      */
     private $description;
@@ -148,21 +150,25 @@ class Items
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="3", max="30")
      * @ORM\Column(name="name", type="string", length=30, nullable=false)
      */
     private $name;
 
     /**
      * @var integer
-     *
+     * @Assert\NotBlank
+     * @Assert\Range(min = 1,max = 5000,minMessage = "Items needed Must be atleast 1 ",maxMessage = "You can't get more than 5000 let's be real :) ")
      * @ORM\Column(name="quantity", type="integer", nullable=false)
      */
     private $quantity;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="1", max="15")
+     * @Assert\Choice({"Collected","Waiting"})
      * @ORM\Column(name="status", type="string", length=15, nullable=false)
      */
     private $status;

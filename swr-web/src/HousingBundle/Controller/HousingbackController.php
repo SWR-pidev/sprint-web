@@ -11,9 +11,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HousingbackController extends Controller
 {
-    public function showAction()
+    public function showAction(Request $request)
     {   $housings = $this->getDoctrine()->getRepository(   Housing::class)->findAll();
-        return $this->render('@Housing/Back/housingback.html.twig',array('housings'=>$housings));
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator= $this->get('knp_paginator');
+        $result= $paginator->paginate(
+            $housings,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+        return $this->render('@Housing/Back/housingback.html.twig',array('housings'=>$result));
     }
 
 //    public function createAction(Request $request)

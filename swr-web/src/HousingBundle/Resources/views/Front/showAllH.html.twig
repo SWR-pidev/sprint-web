@@ -116,27 +116,33 @@
 						</span>
                         </div><!-- .post-meta END -->
                     </div><!-- .xs-from-journal END -->
+
                 </div>
                 {% endfor %}
 
             </div><!-- .row end -->
+
             </div>
-        </div><!-- .container end -->
+
+        <!-- .container end -->
+        <div class="navigation center">
+            {{ knp_pagination_render(housings) }}
+        </div>
     </section><!-- End journal section -->
     <section>
     <div class="container xs-section-padding-bottom">
-        <div class="xs-heading row xs-mb-60">
-            <div class="col-md-9 col-xl-9">
+        <div class="xs-heading row ">
 
-                <h4 class="entry-title">
-                    <details>
+
+                <h4 class="entry-title" width="90%">
+                    <details width="80%">
                         <summary><b>Click Here To View Stats</b></summary>
 
-                        <div id='div_chart' class="col-md-auto"></div>
-                        <div id='div_chart2' class="col-md-auto"  ></div>
+                        <div id='div_chart' ></div><br>
+                        <div id='div_chart2' ></div>
                     </details></h4>
 
-            </div>
+
         </div>
     </div>
 </section>

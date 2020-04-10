@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HousingController extends Controller
 {
-    public function showAction()
+    public function showAction(Request $request)
     {   $housings = $this->getDoctrine()->getRepository(   Housing::class)->findAll();
         $pieChart = new PieChart();
         $totalHousings=0;
@@ -61,15 +61,24 @@ class HousingController extends Controller
             ->setTitle('Housings')
             ->setSubtitle('Nombre of Residents on the left, Capacity on the right');
         $chart->getOptions()
-            ->setHeight(400)
+            ->setHeight(500)
             ->setWidth(900)
             ->setSeries([['axis' => 'Residents'], ['axis' => 'Capacity']])
             ->setAxes(['x' => [
                 'Residents' => ['label' => ''],
                 'Capacity' => ['side' => 'top', 'label' => '']]
             ]);
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator= $this->get('knp_paginator');
+        $result= $paginator->paginate(
+            $housings,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',3)
 
-        return $this->render('@Housing/Front/showAllH.html.twig',array('housings'=>$housings,'piechart'=>$pieChart,'chart'=>$chart,'ratings'=>$ratings));
+        );
+        return $this->render('@Housing/Front/showAllH.html.twig',array('housings'=>$result,'piechart'=>$pieChart,'chart'=>$chart,'ratings'=>$ratings));
 
     }
 
@@ -105,13 +114,23 @@ class HousingController extends Controller
 
 
 
-    public function itemsAction($id)
+    public function itemsAction(Request $request,$id)
     {
 
         $housings = $this->getDoctrine()->getRepository(   Housing::class)->find($id);
         $repository=$this->getDoctrine()->getManager()->getRepository(Items::class);
         $listItems= $repository->myfindbyhousingid($id);
-        return $this->render('@Housing/Front/Items.html.twig',array('housing'=>$housings,'items'=>$listItems));
+        /**
+         * @var $paginator \knp\Component\Pager\Paginator
+         */
+        $paginator= $this->get('knp_paginator');
+        $result= $paginator->paginate(
+            $listItems,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',3)
+
+        );
+        return $this->render('@Housing/Front/Items.html.twig',array('housing'=>$housings,'items'=>$result));
     }
 
 }
