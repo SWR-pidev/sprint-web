@@ -1,0 +1,205 @@
+{% extends 'default/Front/squelette.html.twig' %}
+{% block title %} Event Single {% endblock %}
+   {% block login %}{% endblock %}
+{% block userinfo %}
+    <li><a href="faq.html" >
+
+      <p class="d-flex-center-end"><i class=" xs-round-avatar">{% block userimg %}<img src="{{ asset('../../swr/web/uploads/') }}{{ u.image }}" class="" >{% endblock %}</i>{% block user %} {{ u }}{% endblock %} </p>
+
+
+
+
+   </a></li>{% endblock %}
+
+{% block logout %}  <li><a href="{{ path('fos_user_security_logout') }}">log out</a></li>{% endblock %}
+
+{% block check %} {% endblock %}
+
+{% block content %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url('{{ asset('Front/assets/images/backgrounds/event_bg.jpg') }}')">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h2>Events</h2>
+                <p>Give a helping hand for Refugees</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="" class="color-white"> Home /</a> Events</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <main class="xs-main">
+        <!-- event single section -->
+        <section class="xs-content-section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="xs-event-banner" height="1170" width="450">
+                            <img src="{{ asset('../../swr/web/uploads/') }}{{ evt.urlEvt }}" alt="" >
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 xs-event-wraper">
+                                <div class="xs-event-content">
+                                    <h4>Event Details</h4>
+                                    <p>{{ evt.detailsEvt }}</p>
+                                </div>
+                                <!-- horizontal tab -->
+                                <div class="xs-horizontal-tabs">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#facilities" role="tab">About</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a   class="nav-link clearfix" data-toggle="tab" href="#contactUs" role="tab">Sponsor</a>
+                                        </li>
+
+                                    </ul><!-- .nav-tabs END -->
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active " id="facilities" role="tabpanel">
+
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="xs-single-funFact funFact-v2">
+                                                        <span class="number-percentage-count number-percentage" data-value="100" data-animation-duration="3500">{{ evt.budgetEvt }}</span><span>$</span>
+                                                        <small>Budget</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="xs-single-funFact funFact-v2">
+                                                        <span class="number-percentage-count number-percentage" data-value="90" data-animation-duration="3500">{{ evt.stillneededEvt }}</span><span>$</span>
+                                                        <small>Still needed</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6" style="padding-top: 20px">
+                                                    {% set foo=100-((evt.budgetEvt-evt.stillneededEvt)/evt.budgetEvt)*100 | round %}
+                                                    <div class="xs-single-funFact funFact-v2">
+                                                        <span class="number-percentage-count number-percentage" data-value="90" data-animation-duration="3500">{{ foo | round }}</span><span>%</span>
+                                                        <small>Raised</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6" style="padding-top: 20px">
+
+                                                    <div class="xs-single-funFact funFact-v2">
+                                                        <span class="number-percentage-count number-percentage" data-value="90" data-animation-duration="3500">{{ evt.nbsponsorEvt }}</span><span></span>
+                                                        <small>Number of Sponsors</small>
+                                                    </div>
+                                                </div>
+
+                                            </div><!-- .row end -->
+                                        </div><!-- #facilities END -->
+                                        <div class="tab-pane" id="contactUs" role="tabpanel">
+                                            <div class="xs-contact-form-wraper">
+                                                <form action="{{ path('CreateSpons', { 'id': evt.idEvt} ) }}" method="POST"  class="xs-contact-form" onclick="return f({{  evt.stillneededEvt}})" enctype="multipart/form-data">
+                                                    <div class="input-group">
+                                                        <div class="custom-file form-control">
+                                                            <input type="file" required="required"  class="custom-file-input" id="f1" name="url" >
+                                                            <label id="file-text" class="custom-file-label" for="customFile">Enter Logo.....</label>
+
+                                                        </div>
+                                                    </div><!-- .input-group END -->
+                                                    <div class="input-group">
+                                                        <input type="text" name="amount" required="required" id="amount" class="form-control" placeholder="Enter Amount.....">
+
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text"><i class="fa fa-dollar"></i></div>
+                                                        </div>
+
+                                                    </div><!-- .input-group END -->
+                                                    <div class="input-group">
+                                                        <span id="errorname"></span>
+                                                    </div><!-- .input-group END -->
+                                                    <div class="g-recaptcha" data-sitekey="6LeuOucUAAAAAIQ5BNAIEKsp1iq6DezXUvsHqW6T" data-callback="recaptchaCallback" ></div>
+                                                    <button class="btn btn-success" type="submit" id="xs-submit" onclick="return fo()" style="margin-top: 2em">submit</button>
+                                                </form><!-- .xs-contact-form #xs-contact-form END -->
+                                            </div>
+                                        </div><!-- #contactUs END -->
+
+                                    </div>
+                                </div>						<!-- End horizontal tab -->
+                            </div>
+                            <div class="col-lg-4">
+                                <!-- horizontal tab -->
+                                <div class="xs-event-schedule-widget">
+                                    <div class="media xs-event-schedule">
+                                        <div class="d-flex xs-evnet-meta-date">
+                                            <span class="xs-event-date">{{ evt.dateEvt | date("Y/m/d")| split('/')[2] }}</span>
+                                            <span class="xs-event-month">{{ evt.dateEvt | date('F')}}</span>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5>{{ evt.nameEvt }}</h5>
+                                        </div>
+                                    </div>
+                                    <ul class="list-group xs-list-group">
+                                        <li class="d-flex justify-content-between">
+                                            Organized by:
+                                            <span>{{ evt.organizatorEvt }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Start:
+                                            <span>{{ evt.timeEvt |date( 'H:i')}}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Location:
+                                            <span>{{ evt.locationEvt }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Phone:
+                                            <span>91 260 554</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Email:
+                                            <span>swr.pidev@gmail.com</span>
+                                        </li>
+                                    </ul>
+                                </div><!-- .xs-event-schedule-widget END -->
+                                <div class="xs-countdown-timer xs-mb-30" data-countdown="{{ evt.dateEvt |date("Y/m/d")}}" style="margin-left: 2em"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- .row end -->
+            </div><!-- .container end -->
+        </section>	<!-- End event single section -->
+    </main>
+
+
+
+<script>
+    function fo() {
+        var y=document.getElementById("er");
+
+        if(grecaptcha && grecaptcha.getResponse().length > 0)
+        {
+            //the recaptcha is checked
+            // Do what you want here
+
+        }
+        else
+        {
+            //The recaptcha is not cheched
+            //  y.innerHTML="Oops, you have to check the recaptcha !";
+            return false;
+        }}
+    function f(x) {
+
+        var gived=document.getElementById('amount').value;
+        var error=document.getElementById('errorname');
+        if(gived>x)
+        {
+            error.innerHTML="You are very generous but we cannot accept this much!";
+            return false;
+        }
+
+
+    }
+</script>
+
+
+
+
+{% endblock %}

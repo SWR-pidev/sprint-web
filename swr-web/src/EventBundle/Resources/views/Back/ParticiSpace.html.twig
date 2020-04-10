@@ -1,0 +1,121 @@
+
+{% extends 'default/Back/squelette.html.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Participation Space</h1>
+
+    </div>
+
+    <!-- Content Row -->
+    <div class="row" style="padding: 0 8em 7em 0">
+
+        {% if evt == NULL %}
+        <h3>NO Events Found</h3>
+        {% else %}
+
+        <table class="table-bordered" style="margin-left: 4em">
+            <thead style="background-color: #feaf31">
+            <tr>
+                <td style="color:#101010" align="center">Name</td>
+                <td style="color: #101010" align="center">Date</td>
+                <td style="color: #101010" align="center">Time</td>
+                <td style="color: #101010" align="center">Location</td>
+
+                <td style="color: #101010" align="center">Budget</td>
+                <td style="color: #101010" align="center">Organizator</td>
+                <td style="color: #101010" align="center">Image</td>
+                <td style="color: #101010" align="center">Viewed</td>
+                <td style="color: #101010" align="center">Sponsors</td>
+                <td style="color: #101010" align="center">Participations</td>
+
+                <td style="color: #101010" align="center">Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in evt %}
+                <tr>
+                    <td>{{ i.nameEvt }}</td>
+                    <td>{{ i.dateEvt |date("m/d/Y")}}</td>
+                    <td>{{ i.timeEvt |date( 'H:i:s')}}</td>
+                    <td>{{ i.locationEvt }}</td>
+
+                    <td>{{ i.budgetEvt }}</td>
+                    <td>{{ i.organizatorEvt }}</td>
+                    <td><img src="{{ asset('../../swr/web/uploads/') }}{{ i.urlEvt }}" height="55" width="70"></td>
+                    <td align="center">{{ i.nbviewsEvt }}</td>
+                    <td align="center">{{ i.nbsponsorEvt }}</td>
+                    <td align="center">{{ i.nbparticipantEvt }}</td>
+
+                    <td align="center">
+
+                        <a href="{{ path('partici_display', { 'id': i.idEvt}) }}">
+                            <img src="{{ asset('Back/img/partici.png') }}" height="38" width="38">
+                        </a>
+
+                    </td>
+
+
+
+                </tr>
+            {% endfor %} {% endif %}
+            </tbody>
+        </table></div>
+        <div class="row">
+            {% if id != NULL %}
+            <div class="card" style="width: 100%;" id="test" >
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Participations of <span id="nameEvt">{{ name }}</span></h6>
+
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body ">
+                      {% if sp == NULL %} No Participation Found
+                        {% else %}
+
+                        <div class=" row  " >
+                            {% for j in sp %}
+                            <div class="col-lg-4 col-md-6 ">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                {% for k in 0..(j.user|length)-1 %}
+                                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                        <h5 class="m-0 font-weight-bold text-primary">{{ j.user[k]["username"] }}</h5>
+                                                        <div class="h6 mb-0 font-weight-bold text-gray-800">{{ j.dateParticipation | date('d F Y') }}</div>
+                                                    </div>
+
+                                            </div>
+                                            <div class="col-auto">
+                                              <img src="{{ asset('../../swr/web/uploads/') }}{{ j.user[k]["image"] }}" alt="Avatar" style="border-radius: 50%" height="70" width="70">
+                                            </div> {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+
+
+                                    <!-- Card Body -->
+
+                                </div>
+
+                            </div>{% endfor %}
+                        </div> {% endif %}
+                    </div>
+                </div>
+            </div>{% endif %}
+        </div>
+
+    <!-- Div Zeyda ama khaleha -->
+    </div>
+    </div>
+{% endblock %}

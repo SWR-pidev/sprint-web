@@ -1,0 +1,288 @@
+{% extends 'default/Front/squelette.html.twig' %}
+
+{% block title %} Event Single {% endblock %}
+   {% block login %}{% endblock %}
+{% block userinfo %}
+    <li><a href="faq.html" >
+
+      <p class="d-flex-center-end"><i class=" xs-round-avatar">{% block userimg %}<img src="{{ asset('../../swr/web/uploads/') }}{{ u.image }}" class="" >{% endblock %}</i>{% block user %} {{ u }}{% endblock %} </p>
+
+
+
+
+   </a></li>{% endblock %}
+
+{% block logout %}  <li><a href="{{ path('fos_user_security_logout') }}">log out</a></li>{% endblock %}
+
+{% block check %} {% endblock %}
+
+{% block content %}
+
+    <style type="text/css">
+
+        .weather {
+            font-family: 'Montserrat',sans-serif;
+            font-weight: 400;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            font-size: 1.3em;
+            height: 40vh;
+
+        }
+        .weather.sunny {
+            background-image: linear-gradient(to right top, #ff4e50, #ff713e, #ff932b, #ffb41d, #f9d423);
+        }
+        .weather.cloudy {
+            background-image: linear-gradient(to right top, #63747c, #71858e, #7f96a0, #8da8b2, #9bbac5);
+        }
+        .weather.rainy {
+            background-image: linear-gradient(to right top, #637c7b, #718e8c, #7ea09e, #8db2b0, #9bc5c3);
+        }
+        h1 {
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+            font-size: 4.5em;
+            text-shadow: .1em .1em 0 rgba(0,0,0,0.3);
+        }
+        .imgg{
+            height: 100px;
+            width: 100px;
+            transform-origin:50% 50%;
+            animation: dance 4s linear infinite 500ms;
+        }
+
+        @keyframes dance {
+            0%, 100% {
+                transform: rotate(0)
+            }
+            25% {
+                transform: rotate(-20deg)
+            }
+            75% {
+                transform: rotate(20deg)
+            }
+        }
+
+
+    </style>
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url('{{ asset('Front/assets/images/backgrounds/event_bg.jpg') }}')">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h2>Events</h2>
+                <p>Give a helping hand for Refugees</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="" class="color-white"> Home /</a> Events</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <main class="xs-main">
+        <!-- event single section -->
+        <section class="xs-content-section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="xs-event-banner" height="1170" width="450">
+                            <img src="{{ asset('../../swr/web/uploads/') }}{{ evt.urlEvt }}" alt="" >
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 xs-event-wraper">
+                                <div class="xs-event-content">
+                                    <h4>Event Details</h4>
+                                    <p>{{ evt.detailsEvt }}</p>
+                                </div>
+                                <!-- horizontal tab -->
+                                <div class="xs-horizontal-tabs">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist" style="margin-left: 18em">
+
+                                        <li class="nav-item">
+                                            <a class="nav-link clearfix" data-toggle="tab" href="#facilities" role="tab">Event Sponsors</a>
+                                        </li>
+
+
+                                    </ul><!-- .nav-tabs END -->
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="facilities" role="tabpanel">
+                                            <div class="row">
+
+                                                {% for j in 0..(evt.logo|length)-1 %}
+                                                <div class="col-md-6">
+                                                    <ul style="padding: 10px; display: inline-block;">
+                                                        <img src="{{ asset('../../../../../../swr/web/uploads/') }}{{evt.logo[j]["logo"] }}" height="80" width="80">
+                                                    </ul>
+                                                </div>
+                                                {% endfor %}
+
+
+                                            </div>
+                                        </div><!-- #facilities END -->
+                                        <div class="tab-pane" id="mapLocation" role="tabpanel">
+                                            <div id="xs-map"></div>
+                                        </div><!-- #mapLocation END -->
+                                        <div class="tab-pane" id="contactUs" role="tabpanel">
+                                            <div class="xs-contact-form-wraper">
+                                                <form action="#" method="POST" id="xs-contact-form" class="xs-contact-form">
+                                                    <div class="input-group">
+                                                        <input type="text" name="name" id="xs-name" class="form-control" placeholder="Enter Your Name.....">
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text"><i class="fa fa-user"></i></div>
+                                                        </div>
+                                                    </div><!-- .input-group END -->
+                                                    <div class="input-group">
+                                                        <input type="email" name="email" id="xs-email" class="form-control" placeholder="Enter Your Email.....">
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                                        </div>
+                                                    </div><!-- .input-group END -->
+                                                    <div class="input-group massage-group">
+                                                        <textarea name="massage" placeholder="Enter Your Message....." id="xs-massage" class="form-control" cols="30" rows="10"></textarea>
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text"><i class="fa fa-pencil"></i></div>
+                                                        </div>
+                                                    </div><!-- .input-group END -->
+                                                    <button class="btn btn-success" type="submit" id="xs-submit">submit</button>
+                                                </form><!-- .xs-contact-form #xs-contact-form END -->
+                                            </div>
+                                        </div><!-- #contactUs END -->
+                                    </div>
+                                </div>						<!-- End horizontal tab -->
+
+                              
+
+                                    <div class="col-md-6 xs-about-feature" >
+                                        <a class="btn btn-success" style="margin-bottom: 2.5em; color: white"  href="{{ path('Add_P',{'id':evt.idEvt}) }}" {% if alreadyis==1 %} hidden="true"{% endif %} > Participate</a>
+                                        <a class="btn btn-success" style="margin-bottom: 2.5em; color: white" href="{{ path('delete_P',{'id':evt.idEvt}) }}" {% if alreadyis==0 %} hidden="true"{% endif %}>Cancel Participation</a>
+                                        <a class="btn btn-primary" style="color: white" href="{{ path('Print_pdf',{'id':evt.idEvt}) }}" {% if alreadyis==0 %} hidden="true"{% endif %}><i class="fa fa-file-pdf-o text-white-150"></i> Print Pdf Invitation</a>
+                                    </div>
+
+
+                            </div>
+                            <div class="col-lg-4">
+                                <!-- horizontal tab -->
+                                <div class="xs-event-schedule-widget">
+                                    <div class="media xs-event-schedule">
+                                        <div class="d-flex xs-evnet-meta-date">
+                                            <span class="xs-event-date">{{ evt.dateEvt | date("Y/m/d")| split('/')[2] }}</span>
+                                            <span class="xs-event-month">{{ evt.dateEvt | date('F')}}</span>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5>{{ evt.nameEvt }}</h5>
+                                        </div>
+                                    </div>
+                                    <ul class="list-group xs-list-group">
+                                        <li class="d-flex justify-content-between">
+                                            Organized by:
+                                            <span>{{ evt.organizatorEvt }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Start:
+                                            <span>{{ evt.timeEvt |date( 'H:i')}}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Location:
+                                            <span>{{ evt.locationEvt }}</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Phone:
+                                            <span>91 260 554</span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            Email:
+                                            <span>swr.pidev@gmail.com</span>
+                                        </li>
+                                    </ul>
+
+                                    <div class="" style="background-color: #f9f9f9; padding-top: 2em;" id="weather">
+                                        <h3 class="widget-title">Weather Prediction</h3>
+                                        <ul class=" weather" style="padding-bottom: 4em" >
+                                            <li >
+                                                <img src="" id="iconW" alt="Weather icon" class="imgg">
+
+
+                                                <h4 id="description" style="color: #2cc391" ></h4>
+                                                <h1 id="temp" style="color: #0571ba"></h1>
+                                                <h4 id="location" style="color: #2cc391"></h4>
+
+                                            </li><!-- 1st post end-->
+                                        </ul>
+                                    </div>
+                                    <div class="xs-countdown-timer xs-mb-30" data-countdown="{{ evt.dateEvt |date("Y/m/d")}}"  id="count"> </div>
+                                </div><!-- .xs-event-schedule-widget END -->
+
+
+<input hidden="true" id="inputDate" value="{{ evt.dateEvt |date("Y/m/d")}}">
+
+                        </div>
+                    </div>
+                </div><!-- .row end -->
+            </div><!-- .container end -->
+        </section>	<!-- End event single section -->
+    </main>
+
+
+<script>
+    const key = '19b74d0925054e91d8d957769a834634';
+
+    if(key=='') document.getElementById('temp').innerHTML = ('Remember to add your api key!');
+
+    function weatherBallon( cityID ) {
+        fetch('https://api.openweathermap.org/data/2.5/weather?id=' + cityID+ '&appid=' + key)
+            .then(function(resp) { return resp.json() }) // Convert data to json
+            .then(function(data) {
+                drawWeather(data);
+            })
+            .catch(function() {
+                // catch any errors
+            });
+    }
+    function drawWeather( d ) {
+        var celcius = Math.round(parseFloat(d.main.temp)-273.15);
+        var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
+        var description = d.weather[0].description;
+        var iconcode = d.weather[0].icon;
+        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        document.getElementById('description').innerHTML = description;
+        document.getElementById('temp').innerHTML = celcius + '&deg;';
+        document.getElementById('location').innerHTML = d.name;
+        document.getElementById('iconW').src =iconurl;
+
+        if( description.indexOf('rain') > 0 ) {
+            document.body.className = 'rainy';
+        } else if( description.indexOf('cloud') > 0 ) {
+            document.body.className = 'cloudy';
+        } else if( description.indexOf('sunny') > 0 ) {
+            document.body.className = 'sunny';
+        } else {
+            document.body.className = 'clear';
+        }
+    }
+    window.onload = function() {
+        weatherBallon( 2464470 );
+        var date = document.getElementById("inputDate").value;
+
+        var myDate = new Date(date);
+        var today= new Date();
+
+        if ((new Date(today.getFullYear(), today.getMonth(), today.getDate()+31)) < myDate) {
+          document.getElementById("weather").hidden=true;
+            document.getElementById("count").style="padding-top: 3em";
+        }
+        else{
+            document.getElementById("count").style="padding-bottom: 3em";
+        }
+    }
+</script>
+
+
+
+
+
+{% endblock %}
