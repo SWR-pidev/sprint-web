@@ -14,28 +14,25 @@
 
 
     <section class="xs-section-padding">
-        <div class="container">
+        <div class="container ">
             <div class="xs-heading row xs-mb-60">
                 <div class="col-md-9 col-xl-9">
                     <h2 class="xs-title">Housings</h2>
                     <span class="xs-separetor "></span>
                     <p>It allows you to check the housings available , check locations , check infos and description  for every housing.</p>
                 </div><!-- .xs-heading-title END -->
-                <div  class="col-xl-3 col-md-3 xs-btn-wraper">
-{#                    <a href="" class="btn btn-primary">Home</a>#}
-                </div><!-- .xs-btn-wraper END -->
-                <div class="container">
-                <div class="row">
-                <br>
-                <div id='div_chart2' class="col-md-auto" ></div>
-                <div id='div_chart' class="col-md-auto"></div></div></div>
-            </div><!-- .row end -->
+
+            </div>
+
+        </div>
+
+            <!-- .row end -->
             <div class="container">
             <div class="row ">
 
                 {% for elt in housings %}
 
-                <div class="col-lg-4 col-md-6 xs-section-padding-bottom">
+                <div class="col-lg-4 col-md-6 xs-section-padding-bottom ">
                     <div class="xs-box-shadow xs-single-journal">
                         <div class="entry-thumbnail ">
                             {% if elt.type=='Camp' %}
@@ -121,10 +118,29 @@
                     </div><!-- .xs-from-journal END -->
                 </div>
                 {% endfor %}
+
             </div><!-- .row end -->
             </div>
         </div><!-- .container end -->
     </section><!-- End journal section -->
+    <section>
+    <div class="container xs-section-padding-bottom">
+        <div class="xs-heading row xs-mb-60">
+            <div class="col-md-9 col-xl-9">
+
+                <h4 class="entry-title">
+                    <details>
+                        <summary><b>Click Here To View Stats</b></summary>
+
+                        <div id='div_chart' class="col-md-auto"></div>
+                        <div id='div_chart2' class="col-md-auto"  ></div>
+                    </details></h4>
+
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
 {% block mapjs %}
 

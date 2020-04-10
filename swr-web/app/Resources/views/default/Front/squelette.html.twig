@@ -75,7 +75,7 @@
                     </div><!-- .xs-logo-wraper END -->
                     <div class="col-lg-7">
                         <ul class="nav-menu">
-                            <li><a href="index.html">Home</a>
+                            <li><a href="{{ path('housing_homepage') }}">Home</a>
                             </li>
                             <li><a href="about.html">about</a></li>
                             <li><a href="causes.html">News</a></li>
@@ -128,7 +128,7 @@
 
                                 <ul class="nav-dropdown color-navy-blue">
                                     {% if app.user %}
-                                        <li><a href="{{ path('fos_user_profile_edit') }}" >
+                                        <li><a href="{{ path('fos_user_profile_show') }}" >
 
                                                 <p class="d-flex-center-end"><i class=" xs-round-avatar"><img src="{{ asset("Front/assets/images/avatar/"~ app.user.image ) }}" class="" ></i>  {{ app.user.getUsername() }} </p>
 

@@ -1,0 +1,138 @@
+
+{% extends 'default/Front/squelette.html.twig' %}
+
+{% block content %}
+    <section class="xs-welcome-slider">
+        <div   style="height:147px; background-image: url({{ asset('Front/assets/images/avatar/navbar.jpg') }});">
+            <div class="xs-welcome-content"  >
+
+                <div class="xs-black-overlay"  style="height:147px;" ></div>
+            </div><!-- .xs-welcome-content END -->
+
+        </div>
+    </section><!-- End welcome section -->
+
+    <section class="xs-section-padding">
+
+        <div class="container">
+            <div class="row my-2">
+                <div class="col-lg-8 order-lg-2">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Edit</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ path('fos_user_profile_show') }}"  class="nav-link">Profile</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content py-4">
+                        <div class="tab-pane active" id="profile">
+
+                            {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit'), 'attr': {'class': 'fos_user_profile_edit'}}) }}
+
+                            {#                        <form method="post" role="form">#}
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                                <div class="col-lg-9">
+                                    {{ form_widget(form.Firstname, { 'attr':{'placeholder':'Firstname','class':'form-control','value':app.user.firstname} }) }}
+{#                                    <input class="form-control" type="text" value="{{ app.user.firstname }}">#}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                                <div class="col-lg-9">
+                                    {{ form_widget(form.Lastname, { 'attr':{'placeholder':'Firstname','class':'form-control','value':app.user.lastname} }) }}
+
+{#                                    <input class="form-control" type="text" value="{{ app.user.lastname }}">#}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                <div class="col-lg-9">
+                                    {{ form_widget(form.email, { 'attr':{'placeholder':'Firstname','class':'form-control','value':app.user.email} }) }}
+
+{#                                    <input class="form-control" type="email" value="{{ app.user.email }}">#}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Country</label>
+                                <div class="col-lg-9">
+                                    {{ form_widget(form.Country, { 'attr':{'placeholder':'Firstname','class':'form-control','value':app.user.country} }) }}
+
+                                    {#                                    <input class="form-control" type="text" value="{{ app.user.country }}">#}
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                                <div class="col-lg-9">
+                                    {{ form_widget(form.username, { 'attr':{'placeholder':'Firstname','class':'form-control','value':app.user.username} }) }}
+
+{#                                    <input class="form-control" type="text" value="{{app.user.username}}">#}
+                                </div>
+                            </div>
+{#                            <div class="form-group row">#}
+{#                                <label class="col-lg-3 col-form-label form-control-label">Password</label>#}
+{#                                <div class="col-lg-9">#}
+{#                                    {{ form_widget(form.plainPassword.first, { 'attr':{'placeholder':'New Password','class':'form-control'} }) }}#}
+
+{#                                    <input class="form-control" type="password" value="">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="form-group row">#}
+{#                                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>#}
+{#                                <div class="col-lg-9">#}
+{#                                    {{ form_widget(form.plainPassword.second , { 'attr':{'placeholder':'Repeat Password','class':'form-control'} }) }}#}
+
+{#                                    <input class="form-control" type="password" value="">#}
+{#                                </div>#}
+{#                            </div>#}
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Current password</label>
+                                <div class="col-lg-9">
+                                    {{ form_widget(form.current_password, { 'attr':{'placeholder':'Current Password','class':'form-control'} }) }}
+
+                                    {#                                    <input class="form-control" type="password" value="">#}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                            <div class="custom-file">
+                                <div>{{ form_widget(form.image, { 'attr': {'type':'file','class':'custom-file-input','id':'customFile','value':app.user.image} }) }}</div>
+
+                                <label class="custom-file-label" for="customFile">Choose Image &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"></label>
+                                <div class="col-lg-9">
+                                    <input type="reset" class="btn btn-secondary" value="Cancel">
+                                    <input type="submit" class="btn btn-primary" value="Save Changes">
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+
+                        <div class="tab-pane" id="edit">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 order-lg-1 text-center">
+
+                    <img src="{{ asset("Front/assets/images/avatar/"~ app.user.image ) }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+                    {#                <h6 class="mt-2">Upload a different photo</h6>#}
+                    {#                <label class="custom-file">#}
+                    {#                    #}
+                    {#                    <input type="file" id="file" class="custom-file-input">#}
+                    {#                    <span class="custom-file-control">Choose file</span>#}
+                    {#                    {{ form_end(form) }}#}
+                    {#                </label>#}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

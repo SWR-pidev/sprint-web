@@ -37,7 +37,7 @@ class HousingController extends Controller
 
 
         $pieChart->getData()->setArrayToDataTable( $data );
-        $pieChart->getOptions()->setTitle('Pourcentage of population per Housing');
+        $pieChart->getOptions()->setTitle('Pourcentage of housing ');
         $pieChart->getOptions()->setHeight(500); $pieChart->getOptions()->setWidth(900);
         $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
         $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
@@ -65,8 +65,8 @@ class HousingController extends Controller
             ->setWidth(900)
             ->setSeries([['axis' => 'Residents'], ['axis' => 'Capacity']])
             ->setAxes(['x' => [
-                'Residents' => ['label' => 'parsecs'],
-                'Capacity' => ['side' => 'top', 'label' => 'apparent magnitude']]
+                'Residents' => ['label' => ''],
+                'Capacity' => ['side' => 'top', 'label' => '']]
             ]);
 
         return $this->render('@Housing/Front/showAllH.html.twig',array('housings'=>$housings,'piechart'=>$pieChart,'chart'=>$chart,'ratings'=>$ratings));

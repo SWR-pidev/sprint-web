@@ -113,7 +113,8 @@
                                 <li>Capacity: {{ housings.capacity }}</li>
                                 <li>Nombre of Residents: {{ housings.nbresidents }}</li>
                                 <li>Address: {{ housings.address }}</li>
-
+                                {% set urlloc='http://maps.google.com/maps?q='~lat~','~lng %}
+                                {{ barcode({code: urlloc, type: 'qrcode', format: 'html' ,'width':10,'height':10}) }}
                             </ul>
 
                         </div><!-- .xs-entry-content END -->
@@ -151,6 +152,8 @@
 
                                     </div><!-- .comment-body -->
                                 </li><!-- #comment-## -->
+{#                                {% set test= (rating.idUser.getId() == app.user.id) %}#}
+
                             {% endfor %}
 
                         </ul>
@@ -190,12 +193,13 @@
 
                                         <input placeholder="Choose A Rating *" name="rating"    type="number" max="5" min="1">
                                 {% endif %}
-
                                 <div class="text-right">
 {#                                    {% for rating in ratings %}#}
                                     {% if app.user %}
 
                                    <button type="submit" class="btn btn-primary" name="submit"> Submit Review</button>
+
+
                                     {% else %}
                                     <a class="btn btn-primary"  href="{{path('fos_user_security_login')}}">Submit Review</a>
                                     {% endif %}

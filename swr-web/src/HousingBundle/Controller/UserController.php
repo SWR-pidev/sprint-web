@@ -25,6 +25,7 @@ class UserController extends Controller
     }
 
 
+
     public function updateAction(Request $request , $id){
         $em = $this->getDoctrine()->getManager();
         $emp = $em->getRepository(User::class)->find($id);

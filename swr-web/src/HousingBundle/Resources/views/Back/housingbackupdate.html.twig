@@ -16,106 +16,123 @@
     </style>
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="row page-titles">
+<div class="container">
+    <div class="row page-titles">
 
-            <div class="col-md-5 align-self-center">
-                <h3 class="text-themecolor">Create new Housing</h3>
-            </div>
-
-            <div>
-                <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-            </div>
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Update Housing</h3>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
 
-                        <form class="m-t-40"  method="post">
-                            <div class="form-group">
-                                <h5>Name: <span class="text-danger">*</span></h5>
-                                <div class="controls">
-                                    <input type="text" name="name" value="{{ housings.name }}" class="form-control" required data-validation-required-message="This field is required" /> </div>
+        <div>
+            <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    {{ form_start(form,{'method': 'post', 'attr': {'class': 'm-t-40'}}) }}
+                    {#                        <form class="m-t-40"  method="post">#}
+                    <div class="form-group">
+                        <h5>Name: <span class="text-danger">*</span></h5>
+                        <div class="controls">
+                            {{ form_widget(form.name, { 'attr':{'class':'form-control','Placeholder':'Name'} }) }}
+                            {% for errorItem in form.name.vars.errors %}
+                                <span class="alert-danger">{{ errorItem.message }}</span><br/>
+                            {% endfor %}
+                            {#                                    <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required"> </div>#}
 
-                            </div>
-                            <div class="form-group">
-                                <h5>Description: <span class="text-danger">*</span></h5>
-                                <div class="controls">
-                                    <input type="text" name="description" value="{{ housings.description }}" class="form-control" required data-validation-required-message="This field is required" /> </div>
-
+                        </div>
+                        <div class="form-group">
+                            <h5>Description: <span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                {{ form_widget(form.description, { 'attr':{'class':'form-control','Placeholder':'Description'} }) }}
+                                {% for errorItem in form.description.vars.errors %}
+                                    <span class="alert-danger">{{ errorItem.message }}</span><br/>
+                                {% endfor %}
                             </div>
                             <div class="form-group">
                                 <h5>Address <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="address" value="{{ housings.address }}" class="form-control" required data-validation-required-message="This field is required" /> </div>
+                                    {{ form_widget(form.address, { 'attr':{'class':'form-control','Placeholder':'address'} }) }}
+                                    {% for errorItem in form.address.vars.errors %}
+                                        <span class="alert-danger">{{ errorItem.message }}</span><br/>
+                                    {% endfor %}
 
-                            </div>
-                            <div class="form-group">
-                                <h5>Capacity <span class="text-danger">*</span></h5>
-                                <div class="controls">
-                                    <input type="number" name="capacity" value="{{ housings.capacity }}" class="form-control" required data-validation-required-message="This field is required" /> </div>
-                            </div>
-                            <div class="form-group">
-                                <h5> Residents<span class="text-danger">*</span></h5>
-                                <div class="input-group">
+                                </div>
+                                <div class="form-group">
+                                    <h5>Capacity <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        {{ form_widget(form.capacity, { 'attr':{'class':'form-control','type':'number','Placeholder':'capacity'} }) }}
+                                        {% for errorItem in form.capacity.vars.errors %}
+                                            <span class="alert-danger">{{ errorItem.message }}</span><br/>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        <h5> Residents<span class="text-danger">*</span></h5>
+                                        <div class="input-group">
+                                            {{ form_widget(form.nbresidents, { 'attr':{'class':'form-control','type':'number','Placeholder':'Residents Number'} }) }}
+                                            {% for errorItem in form.nbresidents.vars.errors %}
+                                                <span class="alert-danger">{{ errorItem.message }}</span><br/>
+                                            {% endfor %}
 
-                                    <input type="number" name="nbresidents"  value="{{ housings.nbresidents }}" class="form-control" required data-validation-required-message="This field is required" pattern=".{8}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Type <span class="text-danger">*</span></h5>
+                                        <div class="input-group">
+                                            {{ form_widget(form.type, { 'attr':{'class':'form-control','Placeholder':'Type'} }) }}
+                                            {% for errorItem in form.type.vars.errors %}
+                                                <span class="alert-danger">{{ errorItem.message }}</span>v
+                                            {% endfor %}
+
+                                        </div>
+
+                                    </div>
+                                    <div class="container">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <h5> Location:<span class="text-danger">*</span></h5>
+                                        <div class="input-group">
+                                            {{ form_widget(form.location, { 'attr':{'class':'form-control','Placeholder':'Location'} }) }}
+                                            {% for errorItem in form.location.vars.errors %}
+                                                <span class="alert-danger">{{ errorItem.message }}</span><br/>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="text-xs-right">
+                                        {{ form_widget(form.save, { 'attr':{'class':'btn btn-info'} }) }}
+                                        {#                                <button type="submit" class="btn btn-info">Submit</button>#}
+                                        <button type="reset" class="btn btn-inverse">Cancel</button>
+                                    </div>
+                                    {{ form_end(form) }}
+                                    {#                        </form>#}
 
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <h5>Type <span class="text-danger">*</span></h5>
-                                <div class="input-group">
-                                    <select class="form-control"  name="type" required data-validation-required-message="This field is required" >
-                                       {% if  housings.type=="Camp"  %}
-                                        <option value="Camp" selected="selected">Camp</option>
-                                        {% else %}
-                                        <option value="House" selected="selected">House</option>
-                                        {% endif %}
-                                    </select>
-                                </div>
-
-                            </div>
-                            <div class="container">
-
-                            </div>
-                            <div class="form-group">
-                                <h5> Location:<span class="text-danger">*</span></h5>
-                                <div class="input-group">
-
-                                    <input type="text" name="location" value="{{ housings.location }}" class="form-control"  required data-validation-required-message="This field is required"  />
-
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="text-xs-right">
-                                <button type="submit" class="btn btn-info">Submit</button>
-                                <button type="reset" class="btn btn-inverse">Cancel</button>
-                            </div>
-                        </form>
-
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
+                </div></div>
 
-    <div id="current" class="container xs-section-padding col-md-8 col-sm-1 align-self-center  "><h5> Get Your Location From here: nothing yet...</h5></div>
-    <div id="map" class="container xs-section-padding  col-md-8 col-sm-1 align-self-center"></div>
+            <div id="current" class="container xs-section-padding col-md-8 col-sm-1 align-self-center  "><h5> Get Your Location From here: nothing yet...</h5></div>
+            <div id="map" class="container xs-section-padding  col-md-6 col-sm-3 align-self-center"></div>
 {% endblock %}
 {% block js %}
 <script>
 
-    {% set loc= housings.location|split(',') %}
+    {% set loc= form.vars.value.location|split(',') %}
     {% set lat=loc[0]|trim('[') %}
     {% set lng=loc[1]|trim(']') %}
     function initMap() {
         var myLatLng = {lat: {{ lat }}, lng:{{ lng }}};
+        // var myLatLng = {lat: 36.872828, lng: 9.769179};
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,

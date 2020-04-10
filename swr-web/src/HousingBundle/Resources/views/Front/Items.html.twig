@@ -1,6 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/Front/squelette.html.twig' %}
 
 {% block content %}
+
     <section class="xs-welcome-slider">
         <div   style="height:147px; background-image: url({{ asset('Front/assets/images/avatar/navbar.jpg') }});">
             <div class="xs-welcome-content"  >
@@ -14,16 +15,33 @@
 
     <main class="xs-main">
         <!-- blog single post -->
-
-        <div class="post-media post-image">
-            {% if housing.type=='Camp' %}
-                <img src="{{  asset('Front/assets/images/avatar/Camp.jpg')}}" class="img-responsive" alt="">
-            {% elseif housing.type=='House' %}
-                <img src="{{  asset('Front/assets/images/avatar/House.jpg')}}" class="img-responsive" alt="">
-            {% endif %}
+        <div class="xs-content-section-padding xs-blog-single">
+            <div class="container">
+                <div class="xs-heading row xs-mb-60">
+                    <div class="col-md-9 col-xl-9">
+                        {% if housing.type=='Camp' %}
+                            <h2 class="xs-title">CAMP Items</h2>
+                        {% else %}
+                            <h2 class="xs-title">HOUSING Items</h2>
+                        {% endif %}
+                        <span class="xs-separetor dashed"></span>
+                        <p>It allows  to gather goods from supporters to help support the housing . They also encourage the other users to offer help as a way to repay them for their support.</p>
+                    </div><!-- .xs-heading-title END -->
+                    <div class="col-xl-3 col-md-3 xs-btn-wraper">
+                        <a href="{{ path('housing_homepage') }}" class="btn btn-primary">All housings</a>
+                    </div><!-- .xs-btn-wraper END -->
+                </div>
+                <div class="row">
         </div><!-- .post-media END -->
 
         <div class="post-body xs-border xs-padding-40">
+            <div class="post-media post-image">
+                {% if housing.type=='Camp' %}
+                    <img src="{{  asset('Front/assets/images/avatar/Camp.jpg')}}" class="img-responsive" alt="">
+                {% elseif housing.type=='House' %}
+                    <img src="{{  asset('Front/assets/images/avatar/House.jpg')}}" class="img-responsive" alt="">
+                {% endif %}
+            </div>
             <div class="entry-header">
                 <div class="post-meta row">
                     <div class="col-md-2 xs-padding-0">

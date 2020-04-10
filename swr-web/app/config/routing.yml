@@ -42,6 +42,4 @@ items_backcreation:
 items_back:
     path:     /admin/items
     defaults: { _controller: HousingBundle:Itemback:show }
-#user_profile:
-#    path:     /user/profile/{id}
-#    defaults: { _controller: HousingBundle:User:profile }
+
