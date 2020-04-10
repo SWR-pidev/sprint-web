@@ -1,0 +1,51 @@
+{% extends'default/Front/squelette.html.twig' %}
+{% block login %} {% endblock %}
+{% block username %}
+    <li><a href="faq.html" >
+            <p class="d-flex-center-end"><i class=" xs-round-avatar"><img src="{{ asset('../../swr/web/uploads/') }}{{ u.image }}" class="" ></i> {{ u }} </p>
+        </a></li>
+{% endblock %}
+ {% block logout %}       <li><a href="http://localhost/swr-web/web/app_dev.php/logout">log out</a></li>  {% endblock %}
+{% block check %} {% endblock %}
+{% block content %}
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url('{{ asset('Front/assets/images/backgrounds/cmp.jpg') }}')">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h1>Compaings</h1>
+                <p>Give a helping hand for poor people</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="index.html" class="color-white"> Home /</a> Compaigns</li>
+                </ul>
+            </div>
+        </div>
+    </section><!-- End welcome section -->
+    <main class="xs-main">
+    <!-- box promo section -->
+    <section class="bg-gray waypoint-tigger xs-section-padding">
+    <div class="container">
+    <div class="xs-heading row xs-mb-60">
+    <div class="col-md-9 col-xl-9">
+        <h2 class="xs-title">Donation Confirmation </h2>
+        <span class="xs-separetor dashed"></span>
+
+    </div><!-- .xs-heading-title END -->
+        <div class="row">
+            <div>
+                <h3 class="float-left s-title-underline">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; Toltal Price:  &nbsp;  $ {{ order.amount | round}} </h3>
+            </div>
+
+            {% form_theme form 'Orders/theme.html.twig' %}
+
+{{ form_start(form) }}
+
+    {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary" id="btn1">Confim Payement </button>
+
+{{ form_end(form) }}
+        </div>
+    </div>
+    </div>
+    </section>
+    </main>
+{% endblock %}
