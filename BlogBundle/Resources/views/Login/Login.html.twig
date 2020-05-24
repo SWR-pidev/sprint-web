@@ -1,0 +1,52 @@
+{% extends 'default/Login/Login.html.twig' %}
+
+{% block content %}
+
+
+
+        {{ include('@FOSUser/Security/login_content.html.twig') }}
+
+
+
+
+
+
+
+
+
+
+    <!--
+
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+
+                <h2 class="form-signin-heading">Login SWR </h2><br>
+
+
+                Username mit en forme avec Bootstrap
+                <input type="text" id="username" class="form-control" name="_username" value=""
+                       placeholder="Username" required="required" autofocus="autofocus"/>
+
+                <input type="password" id="password" class="form-control"
+                       placeholder="Password" name="_password" required="required"/>
+
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                <label for="remember_me">Remember me</label>
+
+
+                <input type="submit" id="_submit" class="btn btn-lg btn-primary btn-block" name="_submit"
+                       value="Login"/>
+
+                <div class="link_to_change">
+                    <a href="{{ path('fos_user_registration_register') }}">S'enregistrer</a> - <a
+                            href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
+                </div>
+                </form>
+
+    -->
+
+
+
+
+
+
+{% endblock %}

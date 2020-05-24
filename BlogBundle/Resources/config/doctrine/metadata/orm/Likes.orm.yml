@@ -1,0 +1,18 @@
+Likes:
+    type: entity
+    table: likes
+    id:
+        iduser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+        idp:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idP
+    lifecycleCallbacks: {  }

@@ -1,0 +1,29 @@
+Sugg:
+    type: entity
+    table: sugg
+    id:
+        idSugg:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_sugg
+            generator:
+                strategy: IDENTITY
+    fields:
+        idCmp:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+            column: id_cmp
+        detail:
+            type: string
+            nullable: true
+            length: 60
+            options:
+                fixed: false
+                default: 'NULL'
+    lifecycleCallbacks: {  }

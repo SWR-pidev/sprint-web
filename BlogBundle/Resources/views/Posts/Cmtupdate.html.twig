@@ -1,0 +1,58 @@
+{% if cmt is defined %}
+
+{% extends 'default/Front/squelette.html.twig' %}
+ {% block title %} Blog {% endblock %}
+    {% block check %} {% endblock %}
+    {% block userinfo %}
+
+        <li><a href="faq.html" >
+
+
+            <p class="d-flex-center-end"><i class=" xs-round-avatar">{% block userimg %}<img src="{{ asset('../../swr/web/uploads/') }}{{ user.image }}" class="" >{% endblock %}</i>{% block user %} {{ user.username }}{% endblock %} </p>
+
+
+
+        </a></li>{% endblock %}
+
+    {% block logout %}  <li><a href="{{ path('fos_user_security_logout') }}">log out</a></li>{% endblock %}
+
+{% block content %}
+
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url({{ asset('Front/assets/images/backgrounds/blog-bg.jpg') }})">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h2>Blog</h2>
+                <p>Give a helping hand for those in need</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="index.html" class="color-white"> Home /</a> Blog</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="xs-section-padding" style="background-color:#F9F9F9" >
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="xs-volunteer-form-wraper volunteer-version-1" style="padding-top: 0px">
+                        <h2>Update your Comment</h2>
+
+                        <form action="{{ path('blog_updateC', { 'id': cmt.idc}) }}" method="post" class="comment-form">
+                            <input type="hidden" value="{{ cmt.idc }}" name="idpp" >
+                            <textarea placeholder="Enter Comments "  name="comment" cols="45" rows="3">{{ cmt.contenuc }}</textarea>
+
+                            <div class="text-left">
+                                <input type="submit" class="btn btn-primary" name="submit">
+                            </div>
+                        </form><!-- .comment-form END -->
+
+                    </div>
+
+
+                </div>
+
+            </div><!-- .row end -->
+        </div><!-- .container end -->
+    </section>
+{% endblock %}
+{% endif %}

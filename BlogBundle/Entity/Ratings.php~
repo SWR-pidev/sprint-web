@@ -1,0 +1,54 @@
+<?php
+
+namespace BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Ratings
+ *
+ * @ORM\Table(name="ratings")
+ * @ORM\Entity
+ */
+class Ratings
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idR", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idr;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idh", type="integer", nullable=false)
+     */
+    private $idh;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idUser", type="integer", nullable=false)
+     */
+    private $iduser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="feedback", type="string", length=50, nullable=false)
+     */
+    private $feedback;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rating", type="integer", nullable=false)
+     */
+    private $rating;
+
+
+}
+

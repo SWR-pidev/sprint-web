@@ -1,0 +1,54 @@
+News:
+    type: entity
+    table: news
+    indexes:
+        nomcat:
+            columns:
+                - nomcat
+    uniqueConstraints:
+        titre:
+            columns:
+                - titre
+    id:
+        idn:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        titre:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        description:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        datepub:
+            type: date
+            nullable: false
+        image:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        nomcat:
+            targetEntity: Categorie
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                nomcat:
+                    referencedColumnName: nomcat
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

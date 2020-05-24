@@ -1,0 +1,54 @@
+Housing:
+    type: entity
+    table: housing
+    id:
+        idh:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        description:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        address:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        location:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        capacity:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        nbresidents:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        type:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

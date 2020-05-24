@@ -1,0 +1,46 @@
+Goods:
+    type: entity
+    table: goods
+    id:
+        idg:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idG
+            generator:
+                strategy: IDENTITY
+    fields:
+        idh:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: idH
+        iduser:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+            column: idUser
+        item:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+        qcollected:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Qcollected
+        status:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

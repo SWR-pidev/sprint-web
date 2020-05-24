@@ -1,0 +1,43 @@
+Comments:
+    type: entity
+    table: comments
+    id:
+        idc:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idC
+            generator:
+                strategy: IDENTITY
+    fields:
+        idp:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: idP
+        contenuc:
+            type: string
+            nullable: false
+            length: 400
+            options:
+                fixed: false
+            column: contenuC
+        datec:
+            type: datetime
+            nullable: false
+            column: dateC
+        reportc:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: reportC
+        iduser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }
