@@ -122,7 +122,6 @@
 
     </div></div>
 
-    <div id="current" class="container xs-section-padding col-md-8 col-sm-1 align-self-center  "><h5> Get Your Location From here: nothing yet...</h5></div>
     <div id="map" class="container xs-section-padding  col-md-10 col-sm-1 align-self-center"></div>
 {% endblock %}
 
@@ -146,7 +145,8 @@
             draggable: true
         });
         marker.addListener('dragend', function(e, i) {
-            document.getElementById('current').innerHTML = 'Get Your Location From here: '+  '['+ marker.getPosition().lat() + ',' + marker.getPosition().lng() + ']';
+            // document.getElementById('current').innerHTML = 'Get Your Location From here: '+  '['+ marker.getPosition().lat() + ',' + marker.getPosition().lng() + ']';
+            document.getElementById('housingbundle_housing_location').value= '['+ marker.getPosition().lat() + ',' + marker.getPosition().lng() + ']';
         });
 
     }

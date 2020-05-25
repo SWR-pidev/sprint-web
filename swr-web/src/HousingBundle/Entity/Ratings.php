@@ -3,10 +3,15 @@
 namespace HousingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ratings
- *
+ *@UniqueEntity(
+ *     fields={"iduser", "idh"},
+ *     message="You Can Only Vote once"
+ * )
  * @ORM\Table(name="ratings", indexes={@ORM\Index(name="fk_hr", columns={"idh"})})
  * @ORM\Entity(repositoryClass="HousingBundle\Repository\ReviewsRepository")
  */
@@ -14,7 +19,8 @@ class Ratings
 {
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="1", max="255")
      * @ORM\Column(name="feedback", type="string", length=255, nullable=false)
      */
     private $feedback;
@@ -31,7 +37,7 @@ class Ratings
 
     /**
      * @var integer
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="rating", type="integer", nullable=false)
      */
     private $rating;

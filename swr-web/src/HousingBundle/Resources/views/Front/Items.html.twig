@@ -149,7 +149,10 @@
 						</span>
                                 <span class="-street-view">
                                     {% if elt.status=='Waiting' %}
-                                <button class="btn btn-secondary">Contribute</button>
+
+
+                                <button class="btn btn-secondary" onclick="openForm()" >Contribute</button>
+
                                     {% elseif elt.status=='Collected' %}
                                  <button class="btn btn-primary" disabled>Thank You :)</button>
                                     {% endif %}
@@ -160,10 +163,91 @@
 
                 </div><!-- .row end -->
             </div><!-- .container end -->
+
             <div class="navigation center">
                 {{ knp_pagination_render(items) }}
             </div>
+
         </section>	<!-- End journal section -->
+
+                <section class="xs-section-padding bg-gray">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2>Contribution Form </h2>
+                                {{ form_start(form,{'method': 'post', 'attr': {'class': 'm-t-40','display':'block'}}) }}
+                                <div class="form-group">
+                                    <h5>Housing <span class="text-danger">*</span></h5>
+                                    <div class="input-group">
+                                        {{ form_widget(form.idh, { 'attr':{'class':'form-control','Placeholder':'Housing'} }) }}
+                                        {% for errorItem in form.idh.vars.errors %}
+                                            <span class="alert-danger">{{ errorItem.message }}</span>v
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <h5>Item <span class="text-danger">*</span></h5>
+                                    <div class="input-group">
+                                        {{ form_widget(form.item, { 'attr':{'class':'form-control','Placeholder':'Item'} }) }}
+                                        {% for errorItem in form.idh.vars.errors %}
+                                            <span class="alert-danger">{{ errorItem.message }}</span>v
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <h5>Status <span class="text-danger">*</span></h5>
+                                    <div class="input-group">
+                                        {{ form_widget(form.status, { 'attr':{'class':'form-control','Placeholder':'Status'} }) }}
+                                        {% for errorItem in form.status.vars.errors %}
+                                            <span class="alert-danger">{{ errorItem.message }}</span>v
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+
+
+
+
+                                    <h5>Quantity: <span class="text-danger"></span></h5>
+                                    <div class="controls">
+                                        {#                                    <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required"> </div>#}
+                                        {{ form_widget(form.qcollected, { 'attr':{'class':'form-control','Placeholder':'Quantity You wish To Contribute'} }) }}
+                                        {% for errorItem in form.qcollected.vars.errors %}
+                                            <span class="alert-danger">{{ errorItem.message }}</span><br/>
+                                        {% endfor %}
+                                    </div>
+                                <div class="text-xs-right">
+                                    {{ form_widget(form.save, { 'attr':{'class':'btn btn-info'} }) }}
+                                    <button type="cancel" class="btn btn-secondary" onclick="closeForm()">Cancel</button>
+                                </div>
+
+
+                                    {{ form_end(form) }}
+                            </div>
+                            {#                                            Contribute form end#}
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
     </main>
+{% endblock %}
+{% block mapjs %}
+<script>
+    function openForm() {
+    document.getElementById("housingbundle_goods").style.display = "block";
+    }
+    function closeForm() {
+    document.getElementById("housingbundle_goods").style.display = "none";
+    }
+
+    </script>
+
 {% endblock %}
 

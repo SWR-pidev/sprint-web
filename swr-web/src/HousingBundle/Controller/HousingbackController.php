@@ -4,7 +4,10 @@
 namespace HousingBundle\Controller;
 
 
+use HousingBundle\Entity\Goods;
 use HousingBundle\Entity\Housing;
+use HousingBundle\Entity\Items;
+use HousingBundle\Entity\Ratings;
 use HousingBundle\Form\HousingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,6 +102,14 @@ class HousingbackController extends Controller
 
     public function deleteAction($id){
         $em = $this->getDoctrine()->getManager();
+        $d= $em->getRepository(Ratings::class)
+            ->findanddelete($id);
+        $g=$em->getRepository(Ratings::class)
+            ->findanddeletegoods($id);
+        $i= $em->getRepository(Items::class)
+            ->findanddelete($id);
+
+
         $hs = $em->getRepository(Housing::class)
             ->find($id);
         $em->remove($hs);

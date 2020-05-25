@@ -129,6 +129,12 @@
                         <h4 class="comments-title">Reviews</h4>
                         <!-- start comment -->
                         <ul class="comment-list">
+{#                            Initializing shit #}
+                            {% set rtr = '' %}
+                            {% set rtf = '' %}
+                            {% set idr=0 %}
+                            {% set testing = 0 %}
+
                             {% for rating in ratings %}
                                 <li class="comment">
                                     <div class="comment-body">
@@ -146,13 +152,21 @@
                                               </div><!-- .comment-metadata -->
                                         </div><!-- .comment-meta -->
 
-                                        <div class="comment-content">
+                                        <div class="comment-content w-75 ">
                                             <p>{{ rating.feedback }}</p>
                                         </div><!-- .comment-content -->
 
                                     </div><!-- .comment-body -->
                                 </li><!-- #comment-## -->
-{#                                {% set test= (rating.idUser.getId() == app.user.id) %}#}
+                                {% if app.user %}
+                                {% if ((rating.idUser.getId() == app.user.id)) %}
+                                {% set testing=1  %}
+                                    {% set rtf=rating.feedback %}
+                                    {% set rtr=rating.rating %}
+                                    {% set idr=rating.idr %}
+                                {% endif %}
+                                {% endif %}
+
 
                             {% endfor %}
 
@@ -164,7 +178,9 @@
                                 <input  name="idhouse"  value="{{ housings.idh }}" hidden type="number">
                                 {% if app.user %}
                                 <input  name="iduser"  value="{{ app.user.id}}" hidden type="number">
-
+                                {% if testing!=0 %}
+                                <input  name="idr"  value="{{idr}}" hidden type="number">
+                                {% endif %}
                                 <input placeholder="Enter Name *" name="author" disabled value="{{ app.user.username }}" type="text">
 
                                 <div class="row">
@@ -173,10 +189,15 @@
                                     </div>
 
                                 </div><!-- .comment-info END -->
-
-                                <textarea placeholder="Enter Feedback *" name="feedback" cols="45" rows="8"></textarea>
+                                {% if testing==0 %}
+                                <textarea placeholder="Enter Feedback *" name="feedback"  cols="45" rows="8"></textarea>
 
                                 <input placeholder="Choose A Rating *" name="rating"    type="number" max="5" min="1">
+                                    {% else %}
+                                        <textarea placeholder="Enter Feedback *" name="feedback"  cols="45" rows="8">{{ rtf }}</textarea>
+
+                                        <input placeholder="Choose A Rating *" name="rating"   value="{{ rtr }}"  type="number" max="5" min="1">
+                                        {% endif %}
                                     {% else %}
 
 
@@ -196,10 +217,13 @@
                                 <div class="text-right">
 {#                                    {% for rating in ratings %}#}
                                     {% if app.user %}
+                                        {% if testing==0 %}
+                                            <button type="submit" class="btn btn-primary" name="submit"> Submit Review</button>
+                                        {% else %}
+                                            <span class="alert-info">You already voted</span>
+                                            <button type="submit" class="btn btn-primary"  name="submit"> Edit your Review</button>
 
-                                   <button type="submit" class="btn btn-primary" name="submit"> Submit Review</button>
-
-
+                                        {% endif %}
                                     {% else %}
                                     <a class="btn btn-primary"  href="{{path('fos_user_security_login')}}">Submit Review</a>
                                     {% endif %}

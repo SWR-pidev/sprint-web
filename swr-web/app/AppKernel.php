@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new HousingBundle\HousingBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
-            new Skies\QRcodeBundle\SkiesQRcodeBundle(),
+                new Skies\QRcodeBundle\SkiesQRcodeBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
         ];

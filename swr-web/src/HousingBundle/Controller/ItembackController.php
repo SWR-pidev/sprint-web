@@ -6,6 +6,7 @@ namespace HousingBundle\Controller;
 
 use HousingBundle\Entity\Housing;
 use HousingBundle\Entity\Items;
+use HousingBundle\Entity\Ratings;
 use HousingBundle\Form\ItemsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,6 +100,7 @@ class ItembackController extends Controller
 
     public function deleteAction($id){
         $em = $this->getDoctrine()->getManager();
+        
         $hs = $em->getRepository(Items::class)
             ->find($id);
         $em->remove($hs);

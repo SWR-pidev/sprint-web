@@ -10,6 +10,8 @@ use HousingBundle\Entity\Housing;
 use HousingBundle\Entity\Items;
 use HousingBundle\Entity\Ratings;
 use HousingBundle\Entity\User;
+use HousingBundle\Entity\Goods;
+use HousingBundle\Form\GoodsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -62,7 +64,7 @@ class HousingController extends Controller
             ->setSubtitle('Nombre of Residents on the left, Capacity on the right');
         $chart->getOptions()
             ->setHeight(500)
-            ->setWidth(900)
+            ->setWidth(800)
             ->setSeries([['axis' => 'Residents'], ['axis' => 'Capacity']])
             ->setAxes(['x' => [
                 'Residents' => ['label' => ''],
@@ -84,21 +86,36 @@ class HousingController extends Controller
 
     public function ratingAction(Request $request)
     {
-        $hs=new Ratings();
+
         $em = $this->getDoctrine()->getManager();
 
-        if($request->isMethod('POST')){
 
-            $user = $this->getDoctrine()->getRepository(   User::class)->find($request->get('iduser'));
-            $h= $this->getDoctrine()->getRepository(   Housing::class)->find($request->get('idhouse'));
-            $hs->setIdh($h);
-            $hs->setIduser($user);
+        $ratings = $this->getDoctrine()->getRepository(   Ratings::class)->findAll();
+
+        if($request->isMethod('POST')){
+            $idr=$request->get('idr');
+            if($idr==0){
+                $hs=new Ratings();
+                $user = $this->getDoctrine()->getRepository(   User::class)->find($request->get('iduser'));
+                $h= $this->getDoctrine()->getRepository(   Housing::class)->find($request->get('idhouse'));
+                $hs->setIdh($h);
+
+                $hs->setIduser($user);
+            }
+            else
+            {
+                $hs = $this->getDoctrine()->getRepository(   Ratings::class)->find($idr);
+
+            }
+
+
             $hs->setFeedback($request->get('feedback'));
             $hs->setRating($request->get('rating'));
 
+            
             $em->persist($hs);
             $em->flush();
-            return $this->redirectToRoute('housing_homepage');
+            return $this->redirectToRoute('housing_map',array('id' => $request->get('idhouse')));
 
         }
         return $this->redirectToRoute('housing_homepage');
@@ -116,10 +133,42 @@ class HousingController extends Controller
 
     public function itemsAction(Request $request,$id)
     {
+//        Goods creation
+        $hs=new Goods();
+        $form=$this->createForm(GoodsType::class,$hs);
+        $form->handleRequest($request);
+        if($form->isSubmitted() and $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($hs);
+            $em->flush();
+            return $this->redirectToRoute('housing_homepage');
+
+        }
 
         $housings = $this->getDoctrine()->getRepository(   Housing::class)->find($id);
         $repository=$this->getDoctrine()->getManager()->getRepository(Items::class);
-        $listItems= $repository->myfindbyhousingid($id);
+        $goods=$this->getDoctrine()->getManager()->getRepository(Goods::class)->findAll();
+        //$listItems= $repository->myfindbyhousingid($id);
+        $listItems= $repository->findAll();
+        foreach ($goods as $g)
+        {   foreach($listItems as $l) {
+
+            if ($l->getName()===$g->getItem()){
+                if($l->getQuantity() < $g->getQcollected())
+                {$l->setQuantity(0);
+                $l->setStatus("Collected");}
+                else{
+                    $l->setQuantity($l->getQuantity()- $g->getQcollected());
+                }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($l);
+            $em->flush();
+        }
+
+
+
+        }}
+
         /**
          * @var $paginator \knp\Component\Pager\Paginator
          */
@@ -130,7 +179,7 @@ class HousingController extends Controller
             $request->query->getInt('limit',3)
 
         );
-        return $this->render('@Housing/Front/Items.html.twig',array('housing'=>$housings,'items'=>$result));
+        return $this->render('@Housing/Front/Items.html.twig',array('housing'=>$housings,'items'=>$result,'form'=>$form->createView()));
     }
 
 }
