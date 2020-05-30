@@ -1,0 +1,83 @@
+
+{% extends 'default/Front/squelette.html.twig' %}
+
+{% block content %}
+    <section class="xs-welcome-slider">
+        <div   style="height:147px; background-image: url({{ asset('Front/assets/images/avatar/navbar.jpg') }});">
+            <div class="xs-welcome-content"  >
+
+                <div class="xs-black-overlay"  style="height:147px;" ></div>
+            </div><!-- .xs-welcome-content END -->
+
+        </div>
+    </section><!-- End welcome section -->
+
+    <section class="xs-section-padding">
+
+    <div class="container">
+        <div class="row my-2">
+            <div class="col-lg-8 order-lg-2">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ path('fos_user_profile_edit') }}"  class="nav-link">Edit</a>
+                    </li>
+                </ul>
+                <div class="tab-content py-4">
+                    <div class="tab-pane active" id="profile">
+                        <h5 class="mb-3"><b>"{{ user.username }}"</b> Profile</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Informations :</h6>
+                                <p>
+                                   <b> {{ user.lastname|upper }} {{ user.Firstname |upper }}  </b>
+                                </p>
+                                <p>
+                                    <b>{{ user.email }}</b>
+                                </p>
+                                <h6>Contact: </h6>
+                                <p>
+                                   Email: {{ user.email }}
+                                </p>
+                                <p>
+                                   Tel: {{ user.tel }}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Last Login</h6>
+                                <a  class="badge badge-light badge-pill">{{ user.lastlogin|date }}</a>
+
+                                <hr>
+                                <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
+                                <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
+                                <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                            </div>
+
+                        </div>
+                        <!--/row-->
+                    </div>
+
+                    <div class="tab-pane" id="edit">
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 order-lg-1 text-center">
+
+                <img src="{{ asset("Front/assets/images/avatar/"~ user.image ) }}" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+{#                <h6 class="mt-2">Upload a different photo</h6>#}
+{#                <label class="custom-file">#}
+{#                    #}
+{#                    <input type="file" id="file" class="custom-file-input">#}
+{#                    <span class="custom-file-control">Choose file</span>#}
+{#                    {{ form_end(form) }}#}
+{#                </label>#}
+            </div>
+        </div>
+    </div>
+    </section>
+{% endblock %}

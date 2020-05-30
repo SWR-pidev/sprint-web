@@ -1,0 +1,41 @@
+housing_homepage:
+    path:     /
+    defaults: { _controller: HousingBundle:Housing:show }
+housing_map:
+    path:     /details/{id}
+    defaults: { _controller: HousingBundle:Housing:map }
+housing_items:
+    path:     /items/{id}
+    defaults: { _controller: HousingBundle:Housing:items }
+housing_rating:
+    path:     /rating
+    defaults: { _controller: HousingBundle:Housing:rating }
+all:
+    path:     /all
+    defaults: { _controller: HousingBundle:Housingapi:all }
+
+
+find_Housing:
+    path:     /find/{id}
+    defaults: { _controller: HousingBundle:Housingapi:find}
+#housing_avgrating:
+#    path:     /{id}/avg
+#    defaults: { _controller: HousingBundle:Housingapi:ShowAvgRs}
+housing_avgrating:
+    path:     /ratings/avg
+    defaults: { _controller: HousingBundle:Housingapi:ShowAvgRs}
+housing_allratings:
+    path:     /{id}/ratings
+    defaults: { _controller: HousingBundle:Housingapi:ShowRs}
+new_rating:
+    path:     /rating/new
+    defaults: { _controller: HousingBundle:Housingapi:Newrating}
+all_items:
+    path:     /{id}/items
+    defaults: { _controller: HousingBundle:Housingapi:ShowItems}
+
+
+
+
+
+

@@ -1,0 +1,380 @@
+{% extends 'default/Front/squelette.html.twig' %}
+
+{% block style %}
+    <style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style> {% endblock %}
+{% block content %}
+    <section class="xs-welcome-slider">
+        <div   style="height:147px; background-image: url({{ asset('Front/assets/images/avatar/navbar.jpg') }}); ">
+            <div class="xs-welcome-content"  >
+
+                <div class="xs-black-overlay"  style="height:147px;" ></div>
+            </div><!-- .xs-welcome-content END -->
+
+        </div>
+    </section><!-- End welcome section -->
+
+
+{% endblock %}
+{% block mapjs  %}
+{% set loc= housings.location|split(',') %}
+{% set lat=loc[0]|trim('[') %}
+{% set lng=loc[1]|trim(']') %}
+<section class="xs-section-padding">
+{#    <div class="container">#}
+{#    <div class="xs-heading row xs-mb-60">#}
+{#        <div class="col-md-9 col-xl-9">#}
+{#            <h2 class="xs-title">{{ housings.name }}</h2>#}
+{#            <span class="xs-separetor "></span>#}
+{#            <p>Address: {{ housings.address }}</p>#}
+{#            <p>> This page Allows To check the exact location of the specific housing you choose </p>#}
+
+{#        </div><!-- .xs-heading-title END -->#}
+{#        <div class="col-xl-3 col-md-3 xs-btn-wraper">#}
+{#            <a href="{{ path('housing_homepage') }}" class="btn btn-primary">Return</a>#}
+{#        </div><!-- .xs-btn-wraper END -->#}
+{#    </div><!-- .row end -->#}
+{#    </div>#}
+    <div class="xs-content-section-padding xs-blog-single">
+        <div class="container">
+            <div class="row">
+                <div class="xs-heading row xs-mb-60">
+                    <div class="col-md-9 col-xl-9">
+                        {% if housings.type=='Camp' %}
+                            <h2 class="xs-title">CAMP</h2>
+                        {% else %}
+                            <h2 class="xs-title">HOUSING</h2>
+                        {% endif %}
+                        <span class="xs-separetor dashed"></span>
+                        <p>It allows  to gather goods from supporters to help support the housing . They also encourage the other users to offer help as a way to repay them for their support.</p>
+                    </div><!-- .xs-heading-title END -->
+                    <div class="col-xl-3 col-md-3 xs-btn-wraper">
+                        <a href="{{ path('housing_homepage') }}" class="btn btn-primary">All housings</a>
+                    </div><!-- .xs-btn-wraper END -->
+                </div><!-- .row end -->
+
+                <article class="post format-standard hentry xs-blog-post-details">
+
+                    <div class="post-media post-image">
+                        {% if housings.type=='Camp' %}
+                            <img src="{{  asset('Front/assets/images/avatar/Camp.jpg')}}" class="img-responsive" alt="">
+                        {% elseif housings.type=='House' %}
+                            <img src="{{  asset('Front/assets/images/avatar/House.jpg')}}" class="img-responsive" alt="">
+                        {% endif %}
+                    </div><!-- .post-media END -->
+
+                    <div class="post-body xs-border xs-padding-40">
+                        <div class="entry-header">
+                            <div class="post-meta row">
+                                <div class="col-md-2 xs-padding-0">
+                                    <span class="post-meta-date"><b>{{ housings.nbresidents }}</b> Residents</span>
+                                </div>
+                                <div class="col-md-10 d-flex align-items-end xs-post-meta-list">
+									<span class="post-cat">
+										<i class="fa fa-folder-open"></i><a href="#"> Funding consultancy</a>
+									</span>
+
+                                    <span class="tags-links">
+										<i class="fa fa-tags"></i>
+										<a href="#" rel="tag">Fund</a>,
+										<a href="#" rel="tag">Crowd</a>
+									</span>
+
+                                    <span class="post-comment">
+										<i class="fa fa-envelope-o"></i>
+										<a href="#">39 Comments</a>
+									</span>
+                                </div>
+                            </div><!-- .row end -->
+                            <h2 class="entry-title xs-post-entry-title">
+                                {{ housings.name }}
+                            </h2>
+                        </div><!-- header end -->
+
+                        <div class="entry-content">
+
+                            <blockquote>
+                                {{ housings.description }}
+                            </blockquote>
+
+
+                            <ul class="xs-unorder-list play">
+                                <li>Capacity: {{ housings.capacity }}</li>
+                                <li>Nombre of Residents: {{ housings.nbresidents }}</li>
+                                <li>Address: {{ housings.address }}</li>
+                                {% set urlloc='http://maps.google.com/maps?q='~lat~','~lng %}
+                                {{ barcode({code: urlloc, type: 'qrcode', format: 'html' ,'width':10,'height':10}) }}
+                            </ul>
+
+                        </div><!-- .xs-entry-content END -->
+
+
+                    </div><!-- post-body end -->
+                    {#                Reviews start here :#}
+
+
+                    <!-- post comment -->
+                    <div class="xs-blog-post-comment xs-padding-40 xs-border">
+                        <h4 class="comments-title">Reviews</h4>
+                        <!-- start comment -->
+                        <ul class="comment-list">
+{#                            Initializing shit #}
+                            {% set rtr = '' %}
+                            {% set rtf = '' %}
+                            {% set idr=0 %}
+                            {% set testing = 0 %}
+
+                            {% for rating in ratings %}
+                                <li class="comment">
+                                    <div class="comment-body">
+                                        <div class="comment-meta">
+                                            <div class="comment-author">
+
+                                                <img alt="avatar" src="{{ asset("Front/assets/images/avatar/"~ rating.iduser.getImage() ) }}" class="avatar">
+                                                <b>{{ rating.iduser.getFirstname()|upper }} {{ rating.iduser.getLastname() }}</b>
+                                            </div><!-- .comment-author -->
+                                            <div class="comment-metadata">
+                                                {% for i in 0..(rating.rating-1) %}
+                                                    <span class="fa fa-star checked"></span>
+
+                                                {% endfor %}
+                                              </div><!-- .comment-metadata -->
+                                        </div><!-- .comment-meta -->
+
+                                        <div class="comment-content w-75 ">
+                                            <p>{{ rating.feedback }}</p>
+                                        </div><!-- .comment-content -->
+
+                                    </div><!-- .comment-body -->
+                                </li><!-- #comment-## -->
+                                {% if app.user %}
+                                {% if ((rating.idUser.getId() == app.user.id)) %}
+                                {% set testing=1  %}
+                                    {% set rtf=rating.feedback %}
+                                    {% set rtr=rating.rating %}
+                                    {% set idr=rating.idr %}
+                                {% endif %}
+                                {% endif %}
+
+
+                            {% endfor %}
+
+                        </ul>
+                        <div class="comment-respond">
+                            <h3 class="comment-reply-title">Leave a Review</h3>
+
+                            <form method="POST" action="{{ path('housing_rating') }}" class="comment-form">
+                                <input  name="idhouse"  value="{{ housings.idh }}" hidden type="number">
+                                {% if app.user %}
+                                <input  name="iduser"  value="{{ app.user.id}}" hidden type="number">
+                                {% if testing!=0 %}
+                                <input  name="idr"  value="{{idr}}" hidden type="number">
+                                {% endif %}
+                                <input placeholder="Enter Name *" name="author" disabled value="{{ app.user.username }}" type="text">
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input placeholder="Enter Email *" name="email" disabled value="{{ app.user.email }}" type="email">
+                                    </div>
+
+                                </div><!-- .comment-info END -->
+                                {% if testing==0 %}
+                                <textarea placeholder="Enter Feedback *" name="feedback"  cols="45" rows="8"></textarea>
+
+                                <input placeholder="Choose A Rating *" name="rating"    type="number" max="5" min="1">
+                                    {% else %}
+                                        <textarea placeholder="Enter Feedback *" name="feedback"  cols="45" rows="8">{{ rtf }}</textarea>
+
+                                        <input placeholder="Choose A Rating *" name="rating"   value="{{ rtr }}"  type="number" max="5" min="1">
+                                        {% endif %}
+                                    {% else %}
+
+
+                                        <input placeholder="Enter Name *"   type="text">
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <input placeholder="Enter Email *"   type="email">
+                                            </div>
+
+                                        </div><!-- .comment-info END -->
+
+                                        <textarea placeholder="Enter Feedback *"  name="feedback" cols="45" rows="8"></textarea>
+
+                                        <input placeholder="Choose A Rating *" name="rating"    type="number" max="5" min="1">
+                                {% endif %}
+                                <div class="text-right">
+{#                                    {% for rating in ratings %}#}
+                                    {% if app.user %}
+                                        {% if testing==0 %}
+                                            <button type="submit" class="btn btn-primary" name="submit"> Submit Review</button>
+                                        {% else %}
+                                            <span class="alert-info">You already voted</span>
+                                            <button type="submit" class="btn btn-primary"  name="submit"> Edit your Review</button>
+
+                                        {% endif %}
+                                    {% else %}
+                                    <a class="btn btn-primary"  href="{{path('fos_user_security_login')}}">Submit Review</a>
+                                    {% endif %}
+                                </div>
+                            </form><!-- .comment-form END -->
+                        </div>
+                        <!-- end comment -->
+
+                        <!-- start respond form -->
+
+                        <!-- end respond form -->
+                    </div>
+
+                    <!-- end post comment -->
+
+
+                    {#                    Reviews end here#}
+
+                </article><!-- .post  END -->
+                <!-- format standard closed -->
+
+
+
+            </div>
+        </div><!-- .row end -->
+
+    </div><!-- .container end -->
+
+    </section>
+
+    <div id="map" class="xs-heading row xs-mb-60" >
+
+    </div>
+    <br>
+<script>
+
+    function initMap() {
+        var myLatLng = {lat: {{ lat }}, lng:{{ lng }}};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Housing'
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALPYyxrjY4KClo41xfDVr7xexBWNB2jqk&callback=initMap">
+</script>
+    <footer class="xs-footer-section">
+        <div class="container">
+            <div class="xs-footer-top-layer">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-widget xs-pr-20">
+                        <a href="index.html" class="xs-footer-logo">
+                            <img src="{{ asset('Front/assets/images/footer_logo.png') }}" alt="">
+                        </a>
+                        <p>SWR online and raise money for charity and causes you’re passionate about. CharityPress is an innovative, cost-effective online.</p>
+                        <ul class="xs-social-list-v2">
+                            <li><a href="" class="color-facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="" class="color-twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="" class="color-dribbble"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="" class="color-pinterest"><i class="fa fa-pinterest"></i></a></li>
+                        </ul><!-- .xs-social-list END -->
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-widget">
+                        <h3 class="widget-title">About Us</h3>
+                        <ul class="xs-footer-list">
+                            <li><a href="index.html">About employee</a></li>
+                            <li><a href="#">How it works</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-widget">
+                        <div class="widget recent-posts">
+                            <h3 class="widget-title">Trending Post</h3>
+                            <ul class="xs-recent-post-widget">
+                                <li>
+                                    <div class="posts-thumb float-left">
+                                        <a href="#">
+                                            <img alt="img" class="img-responsive" src="{{ asset('Front/assets/images/news_feeds_1.jpg') }}">
+                                            <div class="xs-entry-date">
+                                                <span class="entry-date d-block">21</span>
+                                                <span class="entry-month d-block">dec</span>
+                                            </div>
+                                            <div class="xs-black-overlay bg-aqua"></div>
+                                        </a>
+                                    </div><!-- .posts-thumb END -->
+                                    <div class="post-info">
+                                        <h4 class="entry-title">
+                                            <a href="#">Child Care Centers</a>
+                                        </h4>
+                                        <div class="post-meta">
+												<span class="comments-link">
+													<i class="fa fa-comments-o"></i>
+													<a href="">300 Comments</a>
+												</span><!-- .comments-link -->
+                                        </div>
+                                    </div><!-- .post-info END -->
+                                    <div class="clearfix"></div>
+                                </li><!-- 1st post end-->
+                                <li>
+                                    <div class="posts-thumb float-left">
+                                        <a href="#">
+                                            <img alt="img" class="img-responsive" src="{{ asset('Front/assets/images/news_feeds_2.jpg') }}">
+                                            <div class="xs-entry-date">
+                                                <span class="entry-date d-block">23</span>
+                                                <span class="entry-month d-block">sep</span>
+                                            </div>
+                                            <div class="xs-black-overlay bg-aqua"></div>
+                                        </a>
+                                    </div><!-- .posts-thumb END -->
+                                    <div class="post-info">
+                                        <h4 class="entry-title">
+                                            <a href="#">Disaster Relief</a>
+                                        </h4>
+                                        <div class="post-meta">
+												<span class="comments-link">
+													<i class="fa fa-comments-o"></i>
+													<a href="">35 Comments</a>
+												</span><!-- .comments-link -->
+                                        </div>
+                                    </div><!-- .post-info END -->
+                                    <div class="clearfix"></div>
+                                </li><!-- 2nd post end-->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 footer-widget">
+                        <h3 class="widget-title">Contact Us</h3>
+                        <ul class="xs-info-list">
+                            <li><i class="fa fa-home"></i>Sector # 48, 123 Street, miosya road VIC 28, Australia.</li>
+                            <li><i class="fa fa-phone"></i>(800) 123.456.7890 (800) 123.456.7890 +00 99 88 5647</li>
+                            <li><i class="fa fa-envelope-o"></i><a href="mailto:yourname@domain.com">yourname@domain.com</a></li>
+                        </ul><!-- .xs-list-with-icon END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="xs-back-to-top-wraper">
+            <a href="#" class="xs-back-to-top"><i class="fa fa-angle-up"></i></a>
+        </div>
+    </footer>
+{% endblock %}
+{% block footer %} {% endblock %}
