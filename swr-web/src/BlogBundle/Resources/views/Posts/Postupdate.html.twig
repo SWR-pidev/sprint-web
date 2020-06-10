@@ -1,0 +1,47 @@
+{% if posts is defined %}
+
+{% extends 'default/Front/squelette.html.twig' %}
+ {% block title %} Blog {% endblock %}
+
+{% block content %}
+
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url({{ asset('Front/assets/images/backgrounds/blog-bg.jpg') }})">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h2>Blog</h2>
+                <p>Give a helping hand for those in need</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="index.html" class="color-white"> Home /</a> Blog</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="xs-section-padding" style="background-color:#F9F9F9" >
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="xs-volunteer-form-wraper volunteer-version-2" style="padding-top: 0px">
+                        <h2>Update your Post</h2>
+                        <p>It only takes a minute to get everything setup.</p>
+
+                        <form action="{{ path('blog_update', { 'id': posts.idp}) }}" method="POST" id="volunteer-form" class="xs-volunteer-form">
+
+                           <textarea name="contenup"  id="massage" type="text" placeholder="Enter your Post" cols="30" class="form-control" rows="10"  >{{ posts.contenup }}</textarea>
+
+
+                            <button type="submit" name="save" class="btn btn-secondary">Submit</button>
+                        </form><!-- #volunteer-form .xs-volunteer-form .v2 END -->
+
+                    </div>
+
+
+                </div>
+                <div class="col-lg-6">
+                    <img src="{{asset('uploads/image/'~posts.imgpost)}}" alt="">
+                </div>
+            </div><!-- .row end -->
+        </div><!-- .container end -->
+    </section>
+{% endblock %}
+{% endif %}

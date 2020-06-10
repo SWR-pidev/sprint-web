@@ -1,0 +1,107 @@
+Event:
+    type: entity
+    table: event
+    id:
+        idEvt:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_evt
+            generator:
+                strategy: IDENTITY
+    fields:
+        nameEvt:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+            column: name_evt
+        dateEvt:
+            type: date
+            nullable: false
+            column: date_evt
+        timeEvt:
+            type: time
+            nullable: false
+            column: time_evt
+        locationEvt:
+            type: string
+            nullable: false
+            length: 55
+            options:
+                fixed: false
+            column: location_evt
+        detailsEvt:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: details_evt
+        budgetEvt:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            column: budget_evt
+        organizatorEvt:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+            column: organizator_evt
+        urlEvt:
+            type: string
+            nullable: false
+            length: 85
+            options:
+                fixed: false
+            column: url_evt
+        nbviewsEvt:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: nbviews_evt
+        nbsponsorEvt:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: nbsponsor_evt
+        nbparticipantEvt:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: nbparticipant_evt
+        nbreportEvt:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: nbreport_evt
+        stateEvt:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+            column: state_evt
+        stillneededEvt:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            options:
+                default: '0'
+            column: stillneeded_evt
+    lifecycleCallbacks: {  }

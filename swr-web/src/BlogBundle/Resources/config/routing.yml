@@ -1,0 +1,45 @@
+blog_homepage:
+    path:     /
+    defaults: { _controller: BlogBundle:Default:index }
+blog_login:
+    path:     /loginnn
+    defaults: { _controller: BlogBundle:Blog:showLogin }
+blog_signin:
+    path:     /sign
+    defaults: { _controller: BlogBundle:User:signin }
+blog_show:
+    path:     /showB
+    defaults: { _controller: BlogBundle:Blog:show }
+blog_showPosts:
+    path:     /showP
+    defaults: { _controller: BlogBundle:Blog:showP }
+blog_createPosts:
+    path:     /createP
+    defaults: { _controller: BlogBundle:Blog:createP }
+blog_deletePost:
+    path:     /delete/{id}
+    defaults: { _controller: BlogBundle:Blog:deletePost }
+blog_update:
+    path:     /update/{id}
+    defaults: { _controller: BlogBundle:Blog:update }
+blog_showDetail:
+    path:     /Detail/{id}
+    defaults: { _controller: BlogBundle:Blog:showDetail }
+blog_showCmt:
+    path:     /Detail/{id}
+    defaults: { _controller: BlogBundle:Blog:showCt }
+blog_createComments:
+    path:     /createC
+    defaults: { _controller: BlogBundle:Blog:createC }
+blog_deleteC:
+    path:     /deleteC/{id}
+    defaults: { _controller: BlogBundle:Blog:deleteCmt }
+blog_updateC:
+    path:     /updateC/{id}
+    defaults: { _controller: BlogBundle:Blog:updateC }
+blog_showPostsBack:
+    path:     /showPB/{id}
+    defaults: { _controller: BlogBundle:Blog:showPB }
+blog_LikeP:
+    path:     /showl/{id}
+    defaults: { _controller: BlogBundle:Blog:like }

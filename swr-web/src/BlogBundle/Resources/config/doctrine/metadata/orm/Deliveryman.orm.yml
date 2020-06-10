@@ -1,0 +1,48 @@
+Deliveryman:
+    type: entity
+    table: deliveryman
+    id:
+        iddman:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idDman
+            generator:
+                strategy: IDENTITY
+    fields:
+        fname:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+            column: Fname
+        lname:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+            column: Lname
+        pnum:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Pnum
+        mail:
+            type: string
+            nullable: false
+            length: 55
+            options:
+                fixed: false
+        numd:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+            column: numD
+    lifecycleCallbacks: {  }

@@ -1,0 +1,68 @@
+<?php
+
+namespace BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Items
+ *
+ * @ORM\Table(name="items")
+ * @ORM\Entity
+ */
+class Items
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idItem", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $iditem;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idh", type="integer", nullable=false)
+     */
+    private $idh;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=30, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=100, nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantity", type="integer", nullable=false)
+     */
+    private $quantity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="expdate", type="string", length=15, nullable=true)
+     */
+    private $expdate = 'NULL';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=15, nullable=false)
+     */
+    private $status;
+
+
+}
+

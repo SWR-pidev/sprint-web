@@ -1,0 +1,62 @@
+Donation:
+    type: entity
+    table: donation
+    id:
+        idDon:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_don
+            generator:
+                strategy: IDENTITY
+    fields:
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_user
+        idCmp:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+            column: id_cmp
+        monthly:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+        message:
+            type: string
+            nullable: true
+            length: 55
+            options:
+                fixed: false
+                default: 'NULL'
+        funds:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        given:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        annonym:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        dated:
+            type: date
+            nullable: false
+        timed:
+            type: time
+            nullable: false
+    lifecycleCallbacks: {  }

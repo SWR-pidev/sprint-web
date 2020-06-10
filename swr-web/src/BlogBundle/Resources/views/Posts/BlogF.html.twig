@@ -1,0 +1,193 @@
+{% extends 'default/Front/squelette.html.twig' %}
+
+ {% block title %} Blog {% endblock %}
+
+
+{% block content %}
+
+    <section class="xs-banner-inner-section parallax-window" style="background-image:url({{ asset('Front/assets/images/backgrounds/blog-bg.jpg') }})">
+        <div class="xs-black-overlay"></div>
+        <div class="container">
+            <div class="color-white xs-inner-banner-content">
+                <h2>Blog</h2>
+
+                <p>Give a helping hand for those in need</p>
+                <ul class="xs-breadcumb">
+                    <li class="badge badge-pill badge-primary"><a href="index.html" class="color-white"> Home /</a>  {% for l in count %} {{ l.c }}
+                        {% if l.c == 3 %}
+                            <script>
+                                var n = new Notification('Please Delete this post and be respectful ' +
+                                    'if you have more than 5 Disrespectful posts you will be banned from this community ');
+                                var init = { notification: n };
+                                var myNotificationEvent = new NotificationEvent(type, init);</script>
+
+                        {% endif %}
+                        {% endfor %}Blog </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <main class="xs-main">
+        <!-- blog section -->
+        <section class="xs-content-section-padding">
+            <div class="container">
+                <div class="row xs-mb-50">
+
+                    {% for i in posts %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="xs-box-shadow xs-single-journal xs-mb-30">
+                            <div class="entry-thumbnail ">
+                                <img src={{ asset('uploads/image/'~i.imgpost)}} alt="" style="height: 220px;width: 370px">
+                                <div class="post-author">
+							<span class="xs-round-avatar">
+								<img class="img-responsive" src="{{asset('Front/assets/images/avatar/avatar_1.jpg')}}" alt="">
+							</span>
+
+                        {% for j in users %}
+                                        {% if i.iduser is same as(j.id) %}
+                                                <label class="author-name">By {{ j.username }} </label>
+                                        {% endif %}
+                        {% endfor %}
+
+
+                                </div>
+                            </div><!-- .xs-item-header END -->
+                              <div class="entry-header">
+                                <div class="entry-meta">
+							<span class="date">
+								<label  rel="bookmark" class="entry-date">
+									{{ i.datep | date }}
+								</label>
+							</span>
+                                </div>
+
+                                <h4 class="entry-title">
+                                    <a href="{{ path('blog_showDetail', { 'id': i.idp} ) }}">{{ i.contenup }}</a>
+                                </h4>
+                                </div><!-- .xs-entry-header END -->
+                            <span class="xs-separetor"></span>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if app.user.id is same as (i.iduser) %}
+
+                            <div class="post-meta meta-style-color">
+						<span class="comments-link">
+							<i class="fa fa-comments-o"></i>
+							<a href="">{{ i.nbcmt }}</a>
+						</span>
+                                <span class="comments-link">
+							          <a href="{{ path('blog_LikeP', { 'id': i.idp} ) }}">  <i class="fa fa-heart"></i>
+							         {{ i.likes }}</a>
+                                  </span>
+
+                                <span class="view-link">
+							<i class="fa fa-eye"></i>
+							<a href="">{{ i.views }}</a>
+						</span>
+
+
+                                <span class="view-link">
+							  <a href="{{ path('blog_deletePost', { 'id': i.idp} ) }}" class="color-twitter"><i class="fa fa-trash"></i></a>
+                                </span>
+
+                                <span class="view-link">
+                                    <a href="{{ path('blog_update', { 'id': i.idp} ) }}" class="color-twitter"><i class="fa fa-arrow-circle-o-down"></i></a>
+                                </span>
+                            </div>
+                                {% else %}
+
+                                <div class="post-meta meta-style-color">
+						          <span class="comments-link">
+							         <i class="fa fa-comments-o"></i>
+							          <a href="">{{ i.nbcmt }}</a>
+                                  </span>
+                                    <span class="comments-link">
+							           <a href="{{ path('blog_LikeP', { 'id': i.idp} ) }}"> <i class="fa fa-heart"></i>
+							       {{ i.likes }}</a>
+                                  </span>
+
+                                    <!-- .comments-link -->
+                                    <span class="view-link">
+							<i class="fa fa-eye"></i>
+							<a href="">{{ i.views }}
+
+                                 </div>
+                                {% endif %}
+                            {% else  %}
+                                <div class="post-meta meta-style-color">
+						          <span class="comments-link">
+							         <i class="fa fa-comments-o"></i>
+							          <a href="">{{ i.nbcmt }}</a>
+                                  </span>
+                                    <span class="comments-link">
+							         <i class="fa fa-heart"></i>
+							          <a href="">{{ i.likes }}</a>
+                                  </span>
+                                    <!-- .comments-link -->
+                                    <span class="view-link">
+							<i class="fa fa-eye"></i>
+							<a href="">{{ i.views }}
+
+                                </div>
+                            {% endif %}
+
+                                <!-- .post-meta END -->
+                        </div><!-- .xs-from-journal END -->
+                    </div>
+                        {% endfor %}
+                </div><!-- .row end -->
+
+
+               		<!-- End pagination -->
+            </div><!-- .container end -->
+
+            <div class="pagination justify-content-center ">
+
+
+                {{ knp_pagination_render(posts) }}
+
+
+            </div>
+        </section>	<!-- End blog section -->
+    </main>
+        <!-- pagination -->
+
+
+        <!-- Creating a post -->
+        <section class="xs-section-padding" style="background-color:#F9F9F9" >
+            <div class="container" >
+                <div class="row xs-mb-50">
+                    <div class="col-lg-6">
+                        <div class="xs-volunteer-form-wraper volunteer-version-2" style="padding-top: 0px">
+                            <h2>Create a Post</h2>
+                            <p>It only takes a minute to get everything setup.</p>
+
+                            {{ form_start(Form,{'attr':{'id':'volunteer-form','class':'xs-volunteer-form'}}) }}
+
+                            {{ form_widget(Form.contenup,{'attr':{'type':'textarea','class':'form-control','id':'massage','placeholder':'Enter your Post...','cols':'30','rows':'5'}}) }}
+                            <div class="row">
+                                <div class="col-lg-6 xs-mb-20">
+                                    <div class="xs-fileContainer">
+                                        {{ form_widget(Form.imgpost,{'attr':{'type':'text','class':'form-control','placeholder':'Upload Image','id':'volunteer_cv','onchange':'readURL(this)'}}) }}
+                                        <label for="volunteer_cv">Upload Image</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{ form_widget(Form.save,{'attr':{'type':'text','class':'btn btn-secondary','placeholder':'Create'}}) }}
+
+                            {{ form_end(Form) }}
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="#" id="blah" style="width: 400px;height: 400px;" alt="">
+                    </div>
+                </div><!-- .row end -->
+            </div><!-- .container end -->
+        </section>
+    </main>
+
+
+{% endblock %}

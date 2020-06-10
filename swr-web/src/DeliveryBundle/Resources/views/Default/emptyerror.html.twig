@@ -1,0 +1,46 @@
+{% extends "default/Back/squelette.html.twig" %}
+
+
+{% block content %}
+    <div class="container">
+
+
+        {% set flashbag_notices = app.session.flashbag.get('notice' ) %}
+        {% if flashbag_notices is not empty %}
+            <div class="alert alert-success" role="alert">
+
+                <ul class="msg">
+                    {% for notice in flashbag_notices %}
+                        <li> {{ notice }} </li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+        {% endif %}
+
+
+        <div class="row"><a href="{{ path('Delivery_create') }}">
+
+                <button class="btn btn-primary">Add a new delivery</button>
+            </a></div>
+        <br>
+
+        {# Display Empty message#}
+        <img src="https://res.cloudinary.com/dfis4oaqs/image/upload/v1591401437/blamm_hkevaz.jpg" alt="No results found" width="800px" height="400px" >
+            {# display navigation #}
+
+
+
+        </div>
+    </div>
+    <br>
+    <div class="row"><a href="{{ path('Delivery_stats') }}">
+
+            <button style="margin-left: 25px;" type="button" class="btn btn-primary">Click here to see some statistics </button>
+        </a></div>
+
+    </br>
+
+
+{% endblock %}

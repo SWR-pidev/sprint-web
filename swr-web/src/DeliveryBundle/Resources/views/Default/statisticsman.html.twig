@@ -1,0 +1,69 @@
+{% extends "default/Back/squelette.html.twig" %}
+
+{% block content %}
+
+<style>
+    #tabm1{
+        width: 33%;
+    }
+
+</style>
+<style>
+    #tabm2 {
+        width: 53%;
+    }
+
+</style>
+<div class="container" style="padding-top: 50px" >
+    <div class="row">
+        <div class="col-sm" id="tabm1">
+            <table class="table table-striped" >
+                <thead>
+                <tr style="border: 5px ; background-color: #A5AAD8;">
+                    <th scope="col">Delivery men</th>
+                    <th scope="col">How many deliveries</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for d in bestdman %}
+                <tr>
+
+                    <td>{{ d.c }}</td>
+                    <td>{{ d.fname }}</td>
+                    {% endfor %}
+                    <td>
+                        <img src="https://res.cloudinary.com/dfis4oaqs/image/upload/v1591403253/clapping_mgvebq.png" width="50px" height ="50px"
+                             alt=""></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm">
+            <table class="table table-bordered" id="tabm2" >
+                <thead>
+                <tr style="border: 5px ; background-color: #A5AAD8;">
+                    <th scope="col">Total number of delivery men</th>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ nbretotaldeliveryman }}</td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+    <br>
+    <div class="row"><a href="{{ path('Deliveryman_chartssdman') }}">
+
+            <button style="margin-left: 25px;" type="button" class="btn btn-primary">Click here to see charts </button>
+        </a></div>
+
+    </br>
+{% endblock %}

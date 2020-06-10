@@ -1,0 +1,95 @@
+{% extends ":default:index.html.twig" %}
+{% block content %}
+<section class="xs-welcome-slider">
+    <div   style="height:147px; background-image: url({{ asset('Front/assets/images/avatar/navbar.jpg') }});">
+        <div class="xs-welcome-content"  >
+
+            <div class="xs-black-overlay"  style="height:147px;" ></div>
+        </div>
+
+    </div>
+</section>
+
+
+    <div class="container ">
+
+        {% set flashbag_notices = app.session.flashbag.get('notice' ) %}
+        {% if flashbag_notices is not empty %}
+            <div class="alert alert-success" role="alert">
+
+                <ul class="msg">
+                    {% for notice in flashbag_notices %}
+                        <li> {{ notice }} </li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+        {% endif %}
+
+            <div class="col-md-9 col-xl-9">
+                <h2 class="xs-title">List of goods</h2>
+
+                <span class="xs-separetor "></span>
+        </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+
+           <div class="row">
+               <table class="table-bordered" border="1">
+
+                    <tr>
+                        <th>The housing</th>
+                        <th>Item</th>
+                        <th>Quantity collected</th>
+                        <th>Medicine you wish to donate</th>
+
+
+                    </tr>
+
+
+                    {% for elt in Goods %}
+                        <tr>
+
+                        <td>{{ elt.idh.name }}</td>
+                        <td>{{ elt.item.name }}</td>
+                        <td>{{ elt.qcollected }}</td>
+                        <td>{{ elt.status }}</td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </table>
+            </div>
+        <div class="navigation">
+            {{ knp_pagination_render(goods) }}
+        </div>
+        </div>
+    </div>
+    <section>
+        <div class="container xs-section-padding-bottom">
+            <div class="xs-heading row ">
+
+
+                <h4 class="entry-title" width="90%">
+
+
+
+                        <div id='div_chart' ></div><br>
+
+                   </h4>
+                <div id='div_chart2' ></div>
+
+            </div>
+        </div>
+    </section>
+    {# display navigation #}
+
+
+{% endblock %}

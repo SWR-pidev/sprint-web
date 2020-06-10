@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SWR - Register</title>
+
+    <!-- Custom fonts for this template-->
+
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{ asset('Back/css/styleLogin.css')}}" rel="stylesheet">
+
+</head>
+<body>
+<h2>SWR: Sign up Form</h2>
+<div class="container" id="container">
+    <div class="form-container sign-in-container">
+
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+
+        <h2>Create Account</h2>
+
+
+        <div class="inline">
+            <div>{{ form_widget(form.Firstname, { 'attr':{'placeholder':'Firstname'} }) }}</div>
+            {% for errorItem in form.Firstname.vars.errors %}
+                <span class="help-inline">{{ errorItem.message }}</span>
+            {% endfor %}
+            <div>{{ form_widget(form.Lastname, { 'attr': {'placeholder':'Lastname'} }) }}</div>
+            {% for errorItem in form.Lastname.vars.errors %}
+                <span class="help-inline">{{ errorItem.message }}</span>
+            {% endfor %}
+        </div>
+        {#            <input type="email" placeholder="Email" />#}
+        <div>{{ form_widget(form.Email, { 'attr': {'placeholder':'Email'} }) }}</div>
+        {{ form_widget(form.Email, { 'attr': {'class': 'form-control', 'placeholder':'E-mail'} }) }}
+        {% for errorItem in form.Email.vars.errors %}
+            <span class="help-inline">{{ errorItem.message }}</span>
+        {% endfor %}
+
+        <div class="inline">
+            <div>{{ form_widget(form.Username, { 'attr': {'placeholder':'Username'} }) }}</div>
+            {% for errorItem in form.Username.vars.errors %}
+                <span class="help-inline">{{ errorItem.message }}</span>
+            {% endfor %}
+            <div>{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder':'Password'} }) }}</div>
+            {% for errorItem in form.plainPassword.first.vars.errors %}
+                <span class="help-inline">{{ errorItem.message }}</span>
+            {% endfor %}
+        </div>
+        <div class="inline">{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder':'Repeat Password'} }) }}
+            {% for errorItem in form.plainPassword.second.vars.errors %}
+                <span class="help-inline">{{ errorItem.message }}</span>
+            {% endfor %}
+        </div>
+        <div class="inline">
+            <div>{{ form_widget(form.Country, { 'attr': {'placeholder':'Country'} }) }}</div>
+            {% for errorItem in form.Country.vars.errors %}
+                <span class="help-inline">{{ errorItem.message }}</span>
+            {% endfor %}
+            {#                <div><input type="text" name="Adresse" placeholder="Address" /></div>#}
+            <div>{{ form_widget(form.tel, { 'attr': {'placeholder':'tel'} }) }}</div>
+            {% for errorItem in form.tel.vars.errors %}
+                <span class="help-inline">{{ errorItem.message }}</span>
+            {% endfor %}
+
+            {#                <div><input type="text" name="tel" placeholder="tel " /></div>#}
+        </div>
+        <div class="custom-file">
+            <div>{{ form_widget(form.image, { 'attr': {'type':'file','class':'custom-file-input','id':'customFile'} }) }}</div>
+
+            <label class="custom-file-label" for="customFile">Choose Image &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        {% for errorItem in form.image.vars.errors %}
+            <span class="help-inline">{{ errorItem.message }}</span>
+        {% endfor %}
+        <br/>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+
+        {{ form_end(form) }}
+    </div>
+
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-right">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <a href="{{path('fos_user_security_login')}}" > <button class="ghost" id="signIn" >Sign In</button></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+
+</footer>
+<script src="{{ asset('Back/js/login.js') }}"></script>
+</body>
+</html>

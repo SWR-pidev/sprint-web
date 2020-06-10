@@ -1,0 +1,59 @@
+{% extends 'default/Back/squelette.html.twig' %}
+
+{% block content %}
+    <!-- Dropdown header -->
+    <div class="px-3 py-3">
+        <h6 class="text-sm text-muted m-0 form-row"><span>You have</span>
+            <strong class="text-primary px-1">{{ mgilet_notification_count(app.user) }}</strong>
+            <span>notifications.{% if notificationList|length > 0 %}</span>
+            <form action="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}"
+                  method="post" class="ml-auto text-right">
+                {% if mgilet_notification_unseen_count(app.user) > 0 %}
+                    <button type="submit" class="btn-link btn-sm btn">Mark all as seen</button>
+                {% else %}
+                    <button type="submit" class="btn-link btn-sm btn" disabled="disabled">Mark all as seen</button>
+                {% endif %}
+            </form>
+            {% endif %}</h6>
+    </div>
+    <!-- List group -->
+    <div class="list-group list-group-flush">
+        {% for item in notificationList %}
+
+            {% set difference = date("now").diff(date(item.notification.date)) %}
+
+            <a href="#!" class="list-group-item list-group-item-action {{ item.seen ? 'bg-gradient-light' : '' }}">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <!-- Avatar -->
+                        <img alt="Image placeholder"
+                             src="{{ asset('assets/img/theme/team-1.jpg') }}"
+                             class="avatar rounded-circle">
+                    </div>
+                    <div class="col ml--2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="mb-0 text-sm">{{ item.notification.subject }}</h4>
+                            </div>
+                            <div class="text-right text-muted">
+                                {% if difference.days != 0 %}
+                                    <small>{{ difference.days }} days ago</small>
+                                {% elseif difference.h !=0 %}
+                                    <small>{{ difference.h }} hrs ago</small>
+                                {% elseif difference.i !=0 %}
+                                    <small>{{ difference.i }} minutes ago</small>
+                                {% else %}
+                                    <small>{{ difference.s }} secs ago</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <p class="text-sm mb-0">{{ item.notification.message }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <!-- View all -->
+    <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View
+        all</a>
+{% endblock %}

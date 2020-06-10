@@ -1,0 +1,26 @@
+delivery:
+    resource: "@DeliveryBundle/Resources/config/routing.yml"
+    prefix: /delivery
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+    # goods_api:
+    # resource: "@DeliveryBundle/Resources/config/routing.yml"
+    # prefix:     /api
+User_back:
+    path:     /admin/users
+    defaults: { _controller: DeliveryBundle:User:showusers }
+User_backcreation:
+    path:     /admin/users/create
+    defaults: { _controller: DeliveryBundle:User:userAdd }
+User_backupdate:
+    path:     /admin/users/update/{id}
+    defaults: { _controller: DeliveryBundle:User:update }
+User_backdelete:
+    path:     /admin/users/delete/{id}
+    defaults: { _controller: DeliveryBundle:User:delete }

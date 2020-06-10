@@ -1,0 +1,55 @@
+Compaign:
+    type: entity
+    table: compaign
+    id:
+        idCmp:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_cmp
+            generator:
+                strategy: IDENTITY
+    fields:
+        nameCmp:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: name_cmp
+        target:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        raised:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        descrip:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        urlimg:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+        nbdon:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        stillneeded:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

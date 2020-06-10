@@ -1,0 +1,33 @@
+
+<table border="1">
+    <tr>
+        <th>IdDel</th>
+        <th>idDman</th>
+        <th>DateD</th>
+        <th>item</th>
+
+
+
+    </tr>
+
+
+    {% for elt in Delivery     %}
+
+        <td>{{ elt.IdDel }}</td>
+        <td>{{ elt.idDman}}</td>
+        <td>{{ elt.DateD }}</td>
+        <td>{{ elt.item}}</td>
+
+        <td><a href="{{ path('Delivery_delete',{'id':elt.id})}}">
+                <button>Supprimer</button></a></td>
+        <td><a href="{{ path('Delivery_edit',{'id':elt.id})}}">
+                <button>modifier</button></a></td>
+        <td><a href="{{ path('Delivery_update',{'item':elt.item})}}">
+                <button>deuxieme modifier</button></a></td>
+        </tr>
+    {% endfor %}
+
+
+</table>
+
+

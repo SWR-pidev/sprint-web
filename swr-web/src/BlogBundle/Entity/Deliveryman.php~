@@ -1,0 +1,61 @@
+<?php
+
+namespace BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Deliveryman
+ *
+ * @ORM\Table(name="deliveryman")
+ * @ORM\Entity
+ */
+class Deliveryman
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idDman", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $iddman;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Fname", type="string", length=25, nullable=false)
+     */
+    private $fname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Lname", type="string", length=25, nullable=false)
+     */
+    private $lname;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="Pnum", type="integer", nullable=false)
+     */
+    private $pnum;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=55, nullable=false)
+     */
+    private $mail;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numD", type="integer", nullable=false)
+     */
+    private $numd = '0';
+
+
+}
+

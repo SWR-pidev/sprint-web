@@ -1,0 +1,37 @@
+Ratings:
+    type: entity
+    table: ratings
+    id:
+        idr:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idR
+            generator:
+                strategy: IDENTITY
+    fields:
+        idh:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        iduser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: idUser
+        feedback:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+        rating:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    lifecycleCallbacks: {  }

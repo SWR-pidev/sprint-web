@@ -1,0 +1,93 @@
+{% extends "default/Back/squelette.html.twig" %}
+
+{% block content %}
+
+<style>
+    #tab1{
+        width: 33%;
+    }
+
+</style>
+    <style>
+        #tab2 {
+            width: 53%;
+        }
+
+    </style>
+<div class="container" style="padding-top: 50px" >
+    <div class="row">
+        <div class="col-sm" id="tab1">
+            <table class="table table-striped" >
+                <thead>
+                <tr style="border: 5px ; background-color: #A5AAD8;">
+                    <th scope="col">Address</th>
+                    <th scope="col">Deliveries</th>
+
+               </tr>
+                </thead>
+                <tbody>
+                {% for s in added %}
+                <tr>
+
+                    <td>{{ s.address }}</td>
+                    <td>{{ s.c }}</td>
+                    {% endfor %}
+                    <td>
+                        <img src="https://res.cloudinary.com/di0bpwchu/image/upload/v1590178635/medal_gaj2bk.svg" width="50px" height="50px"
+                             alt=""></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm">
+            <table class="table table-bordered" id="tab2" >
+                <thead>
+                <tr style="border: 5px ; background-color: #A5AAD8;">
+                    <th scope="col">Total number of deliveries</th>
+                </tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ nbretotaldelivery }}</td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col-sm">
+            <table class="table table-striped" id="tab3">
+                <thead>
+                <tr style="border: 5px ; background-color: #A5AAD8;">
+                    <th scope="col">Item</th>
+                    <th scope="col">Total number of deliveries</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for d in finddeliveryselonitem %}
+                <tr>
+                    <td>{{ d.c }}</td>
+                    <td>{{ d.item }}</td>
+                    {% endfor %}
+                    <td>
+                        <img src="https://res.cloudinary.com/dfis4oaqs/image/upload/v1590782919/fireeee_oyjsqu.jpg" width="30px" height="30px"
+                             alt=""></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    <br>
+    <div class="row"><a href="{{ path('Delivery_chartssd') }}">
+
+            <button style="margin-left: 25px;" type="button" class="btn btn-primary">Click here to see charts </button>
+        </a></div>
+
+    </br>
+{% endblock %}
+
+

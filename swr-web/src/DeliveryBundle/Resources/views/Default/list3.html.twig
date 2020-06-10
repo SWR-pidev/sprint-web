@@ -1,0 +1,32 @@
+<h3>Delivery</h3>
+{% if f==NULL    %}
+
+    No delivery
+{% else %}
+
+
+    <table border="1">
+        <tr>
+            <th>IdDe</th>
+            <th>idDman</th>
+            <th>Date</th>
+            <th>item</th>
+
+
+
+        </tr>
+
+
+        {% for elt in f    %}
+            <tr>
+                <td>{{ elt.IdDe}}</td>
+                <td>{{ elt.idDman|upper  }}</td>
+                <td><a href="{{ path('Delivery_show1',{'titre':elt.titre}) }}">
+                        <button>Participer</button></a></td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+    Sum of deliveries  {{ f|length }}
+{%endif%}

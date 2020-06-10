@@ -1,0 +1,147 @@
+User:
+    type: entity
+    table: user
+    uniqueConstraints:
+        nom:
+            columns:
+                - nom
+        mail:
+            columns:
+                - email
+        tel:
+            columns:
+                - tel
+        username:
+            columns:
+                - username
+        usernameCanonical:
+            columns:
+                - usernameCanonical
+    id:
+        idu:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        prenom:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        country:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        password:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        tel:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        username:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        usernamecanonical:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: 'NULL'
+            column: usernameCanonical
+        emailcanonical:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: 'NULL'
+            column: emailCanonical
+        enabled:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+        salt:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: 'NULL'
+        lastlogin:
+            type: date
+            nullable: true
+            options:
+                default: 'NULL'
+        confirmationtoken:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: 'NULL'
+            column: confirmationToken
+        passwordrequestedat:
+            type: string
+            nullable: true
+            length: 30
+            options:
+                fixed: false
+                default: 'NULL'
+        roles:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        dateins:
+            type: date
+            nullable: false
+        radom:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        iteration:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '3'
+        image:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

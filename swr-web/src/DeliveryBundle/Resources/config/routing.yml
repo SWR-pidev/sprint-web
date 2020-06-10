@@ -1,0 +1,98 @@
+Delivery_homepage:
+    path:     /
+    defaults: { _controller: DeliveryBundle:Default:index }
+Delivery_read:
+    path:     /read/{nom}/{adr}
+    defaults: { _controller: DeliveryBundle:Default:read }
+Delivery_show1:
+    path:     /show/{titre}
+    defaults: { _controller: DeliveryBundle:Default:show}
+Delivery_addDelivery:
+    path:     /addDelivery
+    defaults: { _controller: DeliveryBundle:Delivery:addDelivery}
+Delivery_readDelivery:
+    path:     /readDelivery
+    defaults: { _controller: DeliveryBundle:Delivery:readDelivery}
+Delivery_list:
+    path:     /list
+    defaults: { _controller: DeliveryBundle:Delivery:liste}
+Delivery_read1:
+    path:     /read1
+    defaults: { _controller: DeliveryBundle:Default:read1}
+Delivery_delete:
+    path:     /delete/{IdDe}
+    defaults: { _controller: DeliveryBundle:Delivery:delete}
+Delivery_create:
+    path:     /create
+    defaults: { _controller: DeliveryBundle:Delivery:addDelivery}
+Delivery_edit:
+    path:     /edit/{IdDe}
+    defaults: { _controller: DeliveryBundle:Delivery:update}
+Delivery_update:
+    path:     /update/{IdDe}
+    defaults: { _controller: DeliveryBundle:Delivery:update}
+Delivery_searchformation:
+    path:     /searchformation
+    defaults: { _controller: DeliveryBundle:Formation:searchformation}
+Delivery_trouverdomaine:
+    path:     /trouverdomaine
+    defaults: { _controller: DeliveryBundle:Default:trouverDomaine}
+Delivery_rechercheee:
+        path:     /rechercheer
+        defaults: { _controller: DeliveryBundle:Delivery:rechercheer}
+
+Delivery_stats:
+        path:    /statss
+        defaults: { _controller: DeliveryBundle:Delivery:statss}
+
+Delivery_chartssd:
+    path:    /delcharts
+    defaults: { _controller: DeliveryBundle:Delivery:charttodel}
+
+Deliveryman_addDeliveryman:
+    path:     /addDeliveryman
+    defaults: { _controller: DeliveryBundle:Deliveryman:AddDeliveryman}
+Deliveryman_create:
+    path:     /createman
+    defaults: { _controller: DeliveryBundle:Deliveryman:AddDeliveryman}
+Deliveryman_update:
+    path:     /updateman/{iddman}
+    defaults: { _controller: DeliveryBundle:Deliveryman:updateman}
+Deliveryman_delete:
+    path:     /deleteman/{iddman}
+    defaults: { _controller: DeliveryBundle:Deliveryman:deleteman}
+Deliveryman_list:
+    path:     /listman
+    defaults: { _controller: DeliveryBundle:Deliveryman:listman}
+Deliveryman_stats:
+    path:     /menstats
+    defaults: { _controller: DeliveryBundle:Deliveryman:statssmen}
+Deliveryman_chartssdman:
+    path:    /delmencharts
+    defaults: { _controller: DeliveryBundle:Deliveryman:charttodelmen}
+
+mgilet_notification:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
+
+Goods_lister:
+    path:   /listergoods
+    defaults: { _controller: DeliveryBundle:goods:listergoods}
+Goods_ajouter:
+        path:   /contribute
+        defaults: { _controller: DeliveryBundle:goods:contribute}
+
+all:
+    path:   /goodss/all
+    defaults: { _controller: DeliveryBundle:goodsgoods:all}
+
+allhs:
+    path:   /housing/all
+    defaults: { _controller: DeliveryBundle:goodsgoods:allhousing}
+allitems:
+    path:   /housing/items/all
+    defaults: { _controller: DeliveryBundle:goodsgoods:allitems}
+
+create_task:
+    path:    /goodss/new
+    defaults: { _controller: DeliveryBundle:goodsgoods:creategoods}

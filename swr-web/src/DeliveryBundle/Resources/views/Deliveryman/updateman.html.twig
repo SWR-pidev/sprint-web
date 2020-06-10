@@ -1,0 +1,89 @@
+{% extends 'default/Back/squelette.html.twig' %}
+{% block content %}
+    <div class="container">
+        <div class="row page-titles">
+
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Delivery men</h3>
+            </div>
+
+            <div>
+                <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        {{ form_start(form, {'method': 'post', 'attr': {'class': '"m-t-40'}}) }}
+                        {#                        <form class="m-t-40"  method="post">#}
+{#                        <div class="form-group">#}
+{#                            <h5>Name: <span class="text-danger">*</span></h5>#}
+{#                            <div class="controls">#}
+{#                                #}{#                                    <input type="text" name="name" class="form-control" required data-validation-required-message="This field is required"> </div>#}
+{#                                {{ form_widget(form.iddman, { 'attr': {'placeholder':'DeliveryMan Id','type':'number','class':'form-control'} }) }}</div>#}
+{#                            {% for erroriddman in form.iddman.vars.errors %}#}
+{#                                <span class="help-inline">{{ erroriddman.message }}</span>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+                        <div class="form-group">
+                            <h5>First Name :<span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                {#                                    <input type="text" name="description" class="form-control" required data-validation-required-message="This field is required"> </div>#}
+                                {{ form_widget(form.fname, { 'attr': {'placeholder':'First name','class':'form-control' } }) }}</div>
+                            {% for errorfname in form.fname.vars.errors %}
+                                <span class="help-inline">{{ errorfname.message }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <h5>Last Name :<span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                {{ form_widget(form.lname, { 'attr': {'placeholder':'Last Name','class':'form-control'} }) }}</div>
+                            {% for errorlname in form.lname.vars.errors %}
+                                <span class="help-inline">{{ errorlname.message }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <h5>Phone number :<span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                {{ form_widget(form.pnum, { 'attr': {'placeholder':'Phone number','class':'form-control'} }) }}</div>
+                            {% for errorpnum in form.pnum.vars.errors %}
+                                <span class="help-inline">{{ errorpnum.message }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <h5>E-mail :<span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                {{ form_widget(form.mail, { 'attr': {'placeholder':'Mail','class':'form-control'} }) }}</div>
+                            {% for errormail in form.mail.vars.errors %}
+                                <span class="help-inline">{{ errormail.message }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <h5>Number Delivery :<span class="text-danger">*</span></h5>
+                            <div class="controls">
+                                {{ form_widget(form.numd, { 'attr': {'placeholder':'Number Delivery','class':'form-control'} }) }}</div>
+                            {% for errornumd in form.numd.vars.errors %}
+                                <span class="help-inline">{{ errornumd.message }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="text-xs-right">
+                            {{ form_widget(form.save, { 'attr': {'class':'btn btn-info'} }) }}
+                            {#                                <button type="submit" class="btn btn-info">Submit</button>#}
+                            <button type="reset" class="btn btn-inverse">Cancel</button>
+                        </div>
+                        {{ form_end(form) }}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

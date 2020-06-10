@@ -1,0 +1,50 @@
+Items:
+    type: entity
+    table: items
+    id:
+        iditem:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idItem
+            generator:
+                strategy: IDENTITY
+    fields:
+        idh:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        name:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        description:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+        quantity:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        expdate:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+                default: 'NULL'
+        status:
+            type: string
+            nullable: false
+            length: 15
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

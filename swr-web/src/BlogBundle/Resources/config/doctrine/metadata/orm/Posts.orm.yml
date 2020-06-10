@@ -1,0 +1,64 @@
+Posts:
+    type: entity
+    table: posts
+    id:
+        idp:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: idP
+            generator:
+                strategy: IDENTITY
+    fields:
+        contenup:
+            type: string
+            nullable: false
+            length: 500
+            options:
+                fixed: false
+            column: contenuP
+        nbcmt:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+        views:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+        likes:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+        report:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: 'NULL'
+        iduser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        datep:
+            type: datetime
+            nullable: true
+            options:
+                default: 'NULL'
+            column: dateP
+        imgpost:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: imgPost
+    lifecycleCallbacks: {  }

@@ -1,0 +1,164 @@
+{% extends 'default/Back/squelette.html.twig' %}
+ {% block title %} Blog {% endblock %}
+{% block content %}
+ <div class="container-fluid">
+
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+   <h1 class="h3 mb-0 text-gray-800">SWR Dashboard</h1>
+
+  </div>
+  <div class="row">
+   <div class="col-md-12">
+    <div class="card export-database shadow " >
+     <div class="card-header">
+      <h4>Posts Management</h4>
+     </div>
+     <div class="card-body">
+
+      <div class="table-responsive" style=" overflow: hidden;">
+       <table id="example" class="table table-bordered border-t0 key-buttons text-nowrap w-100" >
+        <thead>
+        <tr>
+         <th{% if posts.isSorted('contenup') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(posts, 'Content', 'contenup') | raw}}</th>
+         <th>{{ knp_pagination_sortable(posts, 'Comments count', 'nbcmt')| raw }}</th>
+         <th>{{ knp_pagination_sortable(posts, 'Views', 'views') | raw}}</th>
+         <th>{{ knp_pagination_sortable(posts, 'Likes', 'likes') | raw}}</th>
+         <th>{{ knp_pagination_sortable(posts, 'Date', 'datep')| raw }}</th>
+         <th>{{ knp_pagination_sortable(posts, 'Image', 'imgpost')| raw }}</th>
+         <th>Action</th>
+         <th>Related Comments</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for elt in posts %}
+         <tr>
+
+
+          <td>
+           {{ elt.contenup  }}
+          </td>
+          <td>
+           {{ elt.nbcmt }}
+          </td>
+          <td>
+           {{ elt.views}}
+          </td>
+          <td>
+
+           {{ elt.likes }}
+
+          </td>
+          <td>
+
+           {{ elt.datep|date }}
+
+          </td>
+
+          <td>
+           {%  if elt.imgpost is empty %}
+           <label> No Image </label>
+           {% else %}
+           <img src={{ asset('uploads/image/'~elt.imgpost)}} width="100" height="100"></td>
+          {% endif %}
+          <td>
+           <a href="{{  path('blog_deletePost', { 'id': elt.idp} ) }}" onclick="" id="supp"><div class="input-group-append">
+             <button class="btn btn-primary"> Delete</button>
+
+            </div></a>
+          </td>
+          <td>
+           <a href="{{  path('blog_showPostsBack', { 'id': elt.idp} ) }}" onclick="" id="supp"><div class="input-group-append">
+             <button class="btn btn-primary"> Show </button>
+
+            </div></a>
+          </td>
+
+
+         </tr>
+
+
+        {% endfor %}
+
+        </tbody>
+       </table>
+       <div class="row">
+       <div class="col-md-4"> {{ knp_pagination_render(posts) | raw }} </div>
+        <div class="col-md-3 offset-md-3"><iframe id="txtArea1" style="display:none"></iframe>
+        <button id="btnExport" onclick="fnExcelReport();" class="btn btn-primary"> Export  </button>
+       </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+   </div>
+  </div>
+
+  <br> <br>
+
+  <div class="row">
+   <div class="col-md-12">
+    <div class="card export-database shadow ">
+     <div class="card-header">
+      <h4>Comments Management</h4>
+     </div>
+     <div class="card-body">
+      <div class="table-responsive">
+       <table id="example" class="table table-bordered border-t0 key-buttons text-nowrap w-100" >
+        <thead>
+        <tr>
+         <th>conaeo</th>
+         <th>Date</th>
+         <th>Delete</th>
+         <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for a in cmt %}
+
+         <tr>
+
+
+          <td>
+           {{ a.contenuc  }}
+          </td>
+          <td>
+           {{ a.datec|date }}
+          </td>
+
+
+          <td>
+           <a href="{{  path('blog_deleteC', { 'id': a.idc} ) }}" onclick="" id="supp"><div class="input-group-append">
+             <button class="btn btn-primary"> Delete</button>
+
+            </div></a>
+          </td>
+          <td>
+           {% set id = 'null' %}
+           <a href="{{  path('blog_showPostsBack', { 'id': id } ) }}" onclick="" id="supp"><div class="input-group-append">
+             <button class="btn btn-primary"> Show all</button>
+
+            </div></a>
+          </td>
+
+
+         </tr>
+
+
+        {% endfor %}
+        </tbody>
+       </table>
+       {{ knp_pagination_render(cmt) | raw }}
+
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+
+ </div>
+
+{% endblock %}
+

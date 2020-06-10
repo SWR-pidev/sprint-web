@@ -1,0 +1,28 @@
+{{ form(f) }}
+
+<table border="1">
+    <tr>
+        <th>IdDe</th>
+        <th>idDman</th>
+        <th>DateD</th>
+        <th>item</th>
+
+
+
+
+    </tr>
+
+
+    {% for elt in formations     %}
+    <tr>
+        <td>{{ elt.IdDe }}</td>
+        <td>{{ elt.idDman}}</td>
+        <td>{{ elt.DateD }}</td>
+        <td>{{ elt.item }}</td>
+
+    <tr>
+        {% endfor %}
+
+
+</table>
+

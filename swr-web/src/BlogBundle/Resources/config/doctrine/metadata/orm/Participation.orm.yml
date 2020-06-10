@@ -1,0 +1,24 @@
+Participation:
+    type: entity
+    table: participation
+    id:
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_user
+        idEvt:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_evt
+    fields:
+        dateParticipation:
+            type: date
+            nullable: false
+            column: date_participation
+    lifecycleCallbacks: {  }
